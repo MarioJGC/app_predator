@@ -1,0 +1,17 @@
+# Flutter / Dart
+.dart_tool/
+build/
+.flutter-plugins*
+*.iml
+.idea/
+# Supabase
+supabase/.branches/
+supabase/.temp/
+# Secretos
+.env
+*.keystore
+*.jks
+key.properties
+# Sistema
+.DS_Store
+Thumbs.db
