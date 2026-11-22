@@ -793,6 +793,60 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'No se pudo guardar la foto.'**
   String get photoError;
+
+  /// No description provided for @labelType.
+  ///
+  /// In es, this message translates to:
+  /// **'Tipo'**
+  String get labelType;
+
+  /// No description provided for @labelSize.
+  ///
+  /// In es, this message translates to:
+  /// **'Tamaño'**
+  String get labelSize;
+
+  /// No description provided for @labelDescription.
+  ///
+  /// In es, this message translates to:
+  /// **'Descripción'**
+  String get labelDescription;
+
+  /// No description provided for @labelDate.
+  ///
+  /// In es, this message translates to:
+  /// **'Fecha'**
+  String get labelDate;
+
+  /// No description provided for @labelLocation.
+  ///
+  /// In es, this message translates to:
+  /// **'Ubicación'**
+  String get labelLocation;
+
+  /// No description provided for @labelNotes.
+  ///
+  /// In es, this message translates to:
+  /// **'Notas'**
+  String get labelNotes;
+
+  /// No description provided for @view.
+  ///
+  /// In es, this message translates to:
+  /// **'Ver'**
+  String get view;
+
+  /// No description provided for @mapReadyNotice.
+  ///
+  /// In es, this message translates to:
+  /// **'Mapa de «{name}» descargado. Ya puedes verlo sin cobertura.'**
+  String mapReadyNotice(String name);
+
+  /// No description provided for @mapFailedNotice.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pudo descargar el mapa de «{name}».'**
+  String mapFailedNotice(String name);
 }
 
 class _AppLocalizationsDelegate

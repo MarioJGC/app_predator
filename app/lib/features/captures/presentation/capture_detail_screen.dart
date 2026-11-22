@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../../../core/widgets/confirm_dialog.dart';
+import '../../../core/widgets/info_row.dart';
 import '../../../core/widgets/info_view.dart';
 import '../../../core/widgets/large_button.dart';
 import '../../../l10n/generated/app_localizations.dart';
@@ -42,7 +43,8 @@ class CaptureDetailScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(title: Text(captureTitle(l10n, capture))),
       body: ListView(
-        padding: const EdgeInsets.all(16),
+        // Extra bottom space: Android's navigation bar covers the screen edge.
+        padding: EdgeInsets.fromLTRB(16, 16, 16, 16 + MediaQuery.viewPaddingOf(context).bottom),
         children: [
           if (capture.photoPath != null)
             ClipRRect(
@@ -54,15 +56,17 @@ class CaptureDetailScreen extends ConsumerWidget {
               ),
             ),
           const SizedBox(height: 16),
-          _InfoRow(icon: Icons.event, text: captureDate(l10n, capture)),
-          _InfoRow(
+          InfoRow(icon: Icons.event, label: l10n.labelDate, value: captureDate(l10n, capture)),
+          InfoRow(
             icon: position != null ? Icons.location_on : Icons.location_off,
-            text: position != null
+            label: l10n.labelLocation,
+            value: position != null
                 ? '${position.latitude.toStringAsFixed(5)}, '
                     '${position.longitude.toStringAsFixed(5)}'
                 : l10n.locationNotAvailable,
           ),
-          if (capture.notes != null) _InfoRow(icon: Icons.notes, text: capture.notes!),
+          if (capture.notes != null)
+            InfoRow(icon: Icons.notes, label: l10n.labelNotes, value: capture.notes!),
           const SizedBox(height: 24),
           LargeButton(
             icon: Icons.delete_outline,
@@ -82,28 +86,6 @@ class CaptureDetailScreen extends ConsumerWidget {
               navigator.pop();
             },
           ),
-        ],
-      ),
-    );
-  }
-}
-
-class _InfoRow extends StatelessWidget {
-  const _InfoRow({required this.icon, required this.text});
-
-  final IconData icon;
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(icon, size: 28),
-          const SizedBox(width: 12),
-          Expanded(child: Text(text)),
         ],
       ),
     );

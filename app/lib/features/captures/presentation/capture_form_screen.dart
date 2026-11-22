@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:maplibre_gl/maplibre_gl.dart';
 import 'package:material_ui/material_ui.dart';
 
+import '../../../core/app_keys.dart';
 import '../../../core/location/location_service.dart';
 import '../../../core/widgets/large_button.dart';
 import '../../../l10n/generated/app_localizations.dart';
@@ -11,6 +12,7 @@ import '../../zones/domain/zone.dart' show huntingSpecies;
 import '../../zones/presentation/zone_labels.dart';
 import '../data/captures_repository.dart';
 import '../data/photo_storage.dart';
+import 'capture_detail_screen.dart';
 
 /// Logs a capture: species, how many, optional photo. Position is automatic.
 class CaptureFormScreen extends ConsumerStatefulWidget {
@@ -74,10 +76,9 @@ class _CaptureFormScreenState extends ConsumerState<CaptureFormScreen> {
     if (species == null) return;
     setState(() => _saving = true);
     final navigator = Navigator.of(context);
-    final messenger = ScaffoldMessenger.of(context);
-    final saved = AppLocalizations.of(context).captureSaved;
+    final l10n = AppLocalizations.of(context);
 
-    await ref.read(capturesRepositoryProvider).createCapture(
+    final id = await ref.read(capturesRepositoryProvider).createCapture(
           species: species,
           count: _count,
           photoPath: _photoPath,
@@ -86,7 +87,11 @@ class _CaptureFormScreenState extends ConsumerState<CaptureFormScreen> {
         );
     _saved = true;
     navigator.pop();
-    messenger.showSnackBar(SnackBar(content: Text(saved)));
+    showAppMessage(
+      l10n.captureSaved,
+      actionLabel: l10n.view,
+      onAction: () => openScreen(CaptureDetailScreen(captureId: id)),
+    );
   }
 
   @override
@@ -105,7 +110,8 @@ class _CaptureFormScreenState extends ConsumerState<CaptureFormScreen> {
     return Scaffold(
       appBar: AppBar(title: Text(l10n.newCapture)),
       body: ListView(
-        padding: const EdgeInsets.all(16),
+        // Extra bottom space: Android's navigation bar covers the screen edge.
+        padding: EdgeInsets.fromLTRB(16, 16, 16, 16 + MediaQuery.viewPaddingOf(context).bottom),
         children: [
           Text(l10n.captureSpecies, style: textTheme.titleMedium),
           const SizedBox(height: 8),

@@ -7,6 +7,7 @@ import '../../../core/location/location_service.dart';
 import '../../../core/map/map_layers.dart';
 import '../../../core/map/offline_maps.dart';
 import '../../../core/widgets/confirm_dialog.dart';
+import '../../../core/widgets/info_row.dart';
 import '../../../core/widgets/info_view.dart';
 import '../../../core/widgets/large_button.dart';
 import '../../../l10n/generated/app_localizations.dart';
@@ -46,7 +47,10 @@ class ZoneDetailScreen extends ConsumerWidget {
             child: _ZoneMap(zone: zone, points: points),
           ),
           Expanded(
-            child: ListView(
+            // SafeArea: keep the last buttons above Android's navigation bar.
+            child: SafeArea(
+              top: false,
+              child: ListView(
               padding: const EdgeInsets.all(16),
               children: [
                 _ZoneSummary(zone: zone),
@@ -96,6 +100,7 @@ class ZoneDetailScreen extends ConsumerWidget {
                   onPressed: () => _delete(context, ref, zone),
                 ),
               ],
+            ),
             ),
           ),
         ],
@@ -147,19 +152,36 @@ class _ZoneSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final lines = [
-      '${l10n.zoneKind(zone.kind)} · ${l10n.zoneSize(zone)}',
-      if (zone.modality != null) l10n.modalityName(zone.modality!),
-      if (zone.species.isNotEmpty) zone.species.map(l10n.speciesName).join(', '),
-      if (zone.description != null) zone.description!,
-    ];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        for (final line in lines)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 6),
-            child: Text(line),
+        InfoRow(
+          icon: zoneKindIcon(zone.kind),
+          label: l10n.labelType,
+          value: l10n.zoneKind(zone.kind),
+        ),
+        InfoRow(
+          icon: Icons.straighten,
+          label: l10n.labelSize,
+          value: l10n.zoneSize(zone),
+        ),
+        if (zone.modality != null)
+          InfoRow(
+            icon: Icons.flag,
+            label: l10n.modality,
+            value: l10n.modalityName(zone.modality!),
+          ),
+        if (zone.species.isNotEmpty)
+          InfoRow(
+            icon: Icons.pets,
+            label: l10n.species,
+            value: zone.species.map(l10n.speciesName).join(', '),
+          ),
+        if (zone.description != null)
+          InfoRow(
+            icon: Icons.notes,
+            label: l10n.labelDescription,
+            value: zone.description!,
           ),
       ],
     );

@@ -115,5 +115,14 @@
   "deleteCapture": "Delete entry",
   "deleteCaptureQuestion": "Delete this entry?",
   "captureNotFound": "This entry no longer exists.",
-  "photoError": "Couldn't save the photo."
+  "photoError": "Couldn't save the photo.",
+  "labelType": "Type",
+  "labelSize": "Size",
+  "labelDescription": "Description",
+  "labelDate": "Date",
+  "labelLocation": "Location",
+  "labelNotes": "Notes",
+  "view": "View",
+  "mapReadyNotice": "Map of \"{name}\" downloaded. You can now see it without signal.",
+  "mapFailedNotice": "Couldn't download the map of \"{name}\"."
 }

@@ -1,5 +1,6 @@
 import 'package:material_ui/material_ui.dart';
 
+import 'core/app_keys.dart';
 import 'core/theme/app_theme.dart';
 import 'features/home/home_shell.dart';
 import 'l10n/generated/app_localizations.dart';
@@ -13,6 +14,8 @@ class HunterApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: rootNavigatorKey,
+      scaffoldMessengerKey: rootMessengerKey,
       onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light(),
