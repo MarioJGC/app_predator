@@ -19,5 +19,89 @@
   "comingSoon": "Próximamente",
   "groupsComingSoon": "Aquí podrás crear tu cuadrilla e invitar a otros cazadores. Llegará con las cuentas de usuario.",
   "huntComingSoon": "Aquí podrás organizar jornadas, asignar puestos y ver a tu grupo en el mapa. Llegará con las cuentas de usuario.",
-  "zonesEmpty": "Todavía no tienes zonas."
+  "zonesEmpty": "Todavía no tienes zonas.",
+  "newZone": "Nueva zona",
+  "newZoneQuestion": "¿Qué quieres crear?",
+  "drawArea": "Dibujar un área",
+  "drawAreaHint": "Para marcar una finca o un coto en el mapa.",
+  "recordRoute": "Grabar una ruta",
+  "recordRouteHint": "Camina y la app guarda el camino con el GPS.",
+  "drawAreaInstructions": "Toca el mapa para marcar las esquinas de la zona.",
+  "undo": "Deshacer",
+  "next": "Siguiente",
+  "startRecording": "Empezar a grabar",
+  "stopRecording": "Parar",
+  "recordRouteInstructions": "Pulsa «Empezar a grabar» y camina por la ruta.",
+  "recordingInfo": "Grabando… Mantén la app abierta y la pantalla encendida.",
+  "distance": "Distancia: {distance}",
+  "zoneName": "Nombre",
+  "zoneNameHint": "Ej.: Coto Los Robles",
+  "zoneNameRequired": "Escribe un nombre",
+  "zoneDescription": "Descripción (opcional)",
+  "species": "Especies",
+  "modality": "Modalidad",
+  "zoneDetails": "Datos de la zona",
+  "editZone": "Editar datos",
+  "deleteZone": "Borrar zona",
+  "deleteZoneQuestion": "¿Borrar la zona «{name}»?",
+  "deleteZoneMessage": "También se borrarán sus puntos.",
+  "addPoint": "Añadir punto",
+  "addPointInstructions": "Mueve el mapa hasta que la cruz quede sobre el lugar.",
+  "pointType": "Tipo de punto",
+  "pointName": "Nombre o número (opcional)",
+  "pointNameHint": "Ej.: 7",
+  "savePointHere": "Guardar punto aquí",
+  "pointsTitle": "Puntos ({count})",
+  "noPoints": "Esta zona todavía no tiene puntos.",
+  "deletePointQuestion": "¿Borrar este punto?",
+  "directions": "Cómo llegar",
+  "directionsError": "No se pudo abrir la app de mapas.",
+  "zoneKindArea": "Área",
+  "zoneKindRoute": "Ruta",
+  "pointStand": "Puesto",
+  "pointParking": "Coche",
+  "pointFeeder": "Comedero",
+  "pointDanger": "Peligro",
+  "pointOther": "Otro",
+  "speciesWildBoar": "Jabalí",
+  "speciesRedDeer": "Ciervo",
+  "speciesRoeDeer": "Corzo",
+  "speciesFallowDeer": "Gamo",
+  "speciesMouflon": "Muflón",
+  "speciesIbex": "Cabra montés",
+  "speciesPartridge": "Perdiz",
+  "speciesRabbit": "Conejo",
+  "speciesHare": "Liebre",
+  "speciesQuail": "Codorniz",
+  "speciesPigeon": "Paloma",
+  "speciesFox": "Zorro",
+  "modalityMonteria": "Montería",
+  "modalityBatida": "Batida",
+  "modalityStalking": "Rececho",
+  "modalityWaiting": "Espera",
+  "modalitySmallGame": "Caza menor",
+  "modalityOther": "Otra",
+  "zoneSaved": "Zona guardada",
+  "zoneNotFound": "Esta zona ya no existe.",
+  "@distance": {
+    "placeholders": {
+      "distance": {
+        "type": "String"
+      }
+    }
+  },
+  "@deleteZoneQuestion": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "@pointsTitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }
