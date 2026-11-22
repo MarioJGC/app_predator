@@ -289,6 +289,7 @@ Las tablas `punto`, `captura`, `jornada`, etc. siguen el mismo patrón. **Todos 
 4. Alternativa sin enlaces: **código de 6 dígitos** para unirse a un grupo, fácil de dictar por teléfono.
 ## 9. Accesibilidad (cómo se implementa en Flutter)
  
+- **Idiomas (español e inglés):** `flutter_localizations` + archivos ARB (`lib/l10n/app_es.arb`, `app_en.arb`) generados con `flutter gen-l10n`. Ningún texto visible va escrito directamente en los widgets.
 - Tema global con `textTheme` base de 18 pt que respeta el tamaño de letra del sistema, con un máximo de 1,5×.
 - Componentes propios: `BotonGrande` (56 px de alto mínimo y texto con icono) y `ConfirmarDialogo` (Sí/No grandes).
 - Navegación con **4 pestañas fijas**, sin menús ocultos.
