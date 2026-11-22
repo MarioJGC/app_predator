@@ -68,10 +68,18 @@ abstract final class AppTheme {
         ),
         iconTheme: const WidgetStatePropertyAll(IconThemeData(size: 30)),
       ),
-      listTileTheme: const ListTileThemeData(
+      listTileTheme: ListTileThemeData(
         minVerticalPadding: 12,
-        titleTextStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-        subtitleTextStyle: TextStyle(fontSize: 16),
+        // Colors must be explicit: a TextStyle without color renders white.
+        titleTextStyle: text.titleMedium?.copyWith(
+          fontSize: 20,
+          fontWeight: FontWeight.w600,
+          color: scheme.onSurface,
+        ),
+        subtitleTextStyle: text.bodyMedium?.copyWith(
+          fontSize: 16,
+          color: scheme.onSurfaceVariant,
+        ),
       ),
       inputDecorationTheme: const InputDecorationTheme(
         border: OutlineInputBorder(),

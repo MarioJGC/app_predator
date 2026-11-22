@@ -5,11 +5,14 @@ import 'package:material_ui/material_ui.dart';
 import '../../core/location/location_service.dart';
 import '../../core/map/map_layers.dart';
 import '../../l10n/generated/app_localizations.dart';
+import '../zones/data/zones_repository.dart';
+import '../zones/presentation/zone_map_layer.dart';
+import '../zones/zones_tab.dart';
 
 /// Default camera: centre of the Iberian Peninsula.
 const _spainCamera = CameraPosition(target: LatLng(40.0, -3.7), zoom: 5.5);
 
-/// Main map: base layer switch and "my location".
+/// Main map: every zone and point, base layer switch and "my location".
 class MapTab extends ConsumerStatefulWidget {
   const MapTab({super.key});
 
@@ -19,18 +22,33 @@ class MapTab extends ConsumerStatefulWidget {
 
 class _MapTabState extends ConsumerState<MapTab> {
   MapLibreMapController? _controller;
-  bool _hasLocationPermission = false;
+  bool _styleLoaded = false;
 
-  @override
-  void initState() {
-    super.initState();
-    _initLocation();
+  void _onMapCreated(MapLibreMapController controller) {
+    _controller = controller;
+    controller.onFillTapped.add((fill) => _openTapped(fill.data));
+    controller.onLineTapped.add((line) => _openTapped(line.data));
+    controller.onCircleTapped.add((circle) => _openTapped(circle.data));
   }
 
-  Future<void> _initLocation() async {
-    final granted = await ref.read(locationServiceProvider).ensurePermission();
-    if (!mounted) return;
-    setState(() => _hasLocationPermission = granted);
+  void _openTapped(Map<dynamic, dynamic>? data) {
+    final zoneId = data?[zoneIdKey];
+    if (zoneId is String) openZone(context, zoneId);
+  }
+
+  Future<void> _onStyleLoaded() async {
+    _styleLoaded = true;
+    await _drawZones();
+  }
+
+  Future<void> _drawZones() async {
+    final controller = _controller;
+    if (controller == null || !_styleLoaded) return;
+    await drawZones(
+      controller,
+      zones: ref.read(zonesProvider).value ?? const [],
+      points: ref.read(allPointsProvider).value ?? const [],
+    );
   }
 
   Future<void> _goToMyLocation() async {
@@ -42,7 +60,7 @@ class _MapTabState extends ConsumerState<MapTab> {
 
     switch (result) {
       case LocationFound(:final position):
-        setState(() => _hasLocationPermission = true);
+        ref.invalidate(locationPermissionProvider);
         await _controller?.animateCamera(
           CameraUpdate.newLatLngZoom(
             LatLng(position.latitude, position.longitude),
@@ -68,16 +86,22 @@ class _MapTabState extends ConsumerState<MapTab> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final layer = ref.watch(mapLayerProvider);
+    final hasLocation = ref.watch(locationPermissionProvider).value ?? false;
     final nextLayerName = layer == MapLayer.orthophoto
         ? l10n.layerTopographic
         : l10n.layerOrthophoto;
+
+    // Redraw when zones or points change.
+    ref.listen(zonesProvider, (_, _) => _drawZones());
+    ref.listen(allPointsProvider, (_, _) => _drawZones());
 
     return Scaffold(
       body: MapLibreMap(
         styleString: layer.styleAsset,
         initialCameraPosition: _spainCamera,
-        onMapCreated: (controller) => _controller = controller,
-        myLocationEnabled: _hasLocationPermission,
+        onMapCreated: _onMapCreated,
+        onStyleLoadedCallback: _onStyleLoaded,
+        myLocationEnabled: hasLocation,
         compassEnabled: true,
       ),
       floatingActionButton: Column(

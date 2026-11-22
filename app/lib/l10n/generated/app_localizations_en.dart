@@ -72,4 +72,202 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get zonesEmpty => 'You don\'t have any areas yet.';
+
+  @override
+  String get newZone => 'New area';
+
+  @override
+  String get newZoneQuestion => 'What do you want to create?';
+
+  @override
+  String get drawArea => 'Draw an area';
+
+  @override
+  String get drawAreaHint => 'To mark an estate or hunting ground on the map.';
+
+  @override
+  String get recordRoute => 'Record a route';
+
+  @override
+  String get recordRouteHint => 'Walk and the app saves the path with GPS.';
+
+  @override
+  String get drawAreaInstructions =>
+      'Tap the map to mark the corners of the area.';
+
+  @override
+  String get undo => 'Undo';
+
+  @override
+  String get next => 'Next';
+
+  @override
+  String get startRecording => 'Start recording';
+
+  @override
+  String get stopRecording => 'Stop';
+
+  @override
+  String get recordRouteInstructions =>
+      'Press \"Start recording\" and walk the route.';
+
+  @override
+  String get recordingInfo => 'Recording… Keep the app open and the screen on.';
+
+  @override
+  String distance(String distance) {
+    return 'Distance: $distance';
+  }
+
+  @override
+  String get zoneName => 'Name';
+
+  @override
+  String get zoneNameHint => 'E.g.: Los Robles estate';
+
+  @override
+  String get zoneNameRequired => 'Enter a name';
+
+  @override
+  String get zoneDescription => 'Description (optional)';
+
+  @override
+  String get species => 'Species';
+
+  @override
+  String get modality => 'Hunting type';
+
+  @override
+  String get zoneDetails => 'Area details';
+
+  @override
+  String get editZone => 'Edit details';
+
+  @override
+  String get deleteZone => 'Delete area';
+
+  @override
+  String deleteZoneQuestion(String name) {
+    return 'Delete the area \"$name\"?';
+  }
+
+  @override
+  String get deleteZoneMessage => 'Its points will also be deleted.';
+
+  @override
+  String get addPoint => 'Add point';
+
+  @override
+  String get addPointInstructions =>
+      'Move the map until the cross is over the place.';
+
+  @override
+  String get pointType => 'Point type';
+
+  @override
+  String get pointName => 'Name or number (optional)';
+
+  @override
+  String get pointNameHint => 'E.g.: 7';
+
+  @override
+  String get savePointHere => 'Save point here';
+
+  @override
+  String pointsTitle(int count) {
+    return 'Points ($count)';
+  }
+
+  @override
+  String get noPoints => 'This area has no points yet.';
+
+  @override
+  String get deletePointQuestion => 'Delete this point?';
+
+  @override
+  String get directions => 'Directions';
+
+  @override
+  String get directionsError => 'Couldn\'t open the maps app.';
+
+  @override
+  String get zoneKindArea => 'Area';
+
+  @override
+  String get zoneKindRoute => 'Route';
+
+  @override
+  String get pointStand => 'Stand';
+
+  @override
+  String get pointParking => 'Parking';
+
+  @override
+  String get pointFeeder => 'Feeder';
+
+  @override
+  String get pointDanger => 'Danger';
+
+  @override
+  String get pointOther => 'Other';
+
+  @override
+  String get speciesWildBoar => 'Wild boar';
+
+  @override
+  String get speciesRedDeer => 'Red deer';
+
+  @override
+  String get speciesRoeDeer => 'Roe deer';
+
+  @override
+  String get speciesFallowDeer => 'Fallow deer';
+
+  @override
+  String get speciesMouflon => 'Mouflon';
+
+  @override
+  String get speciesIbex => 'Iberian ibex';
+
+  @override
+  String get speciesPartridge => 'Partridge';
+
+  @override
+  String get speciesRabbit => 'Rabbit';
+
+  @override
+  String get speciesHare => 'Hare';
+
+  @override
+  String get speciesQuail => 'Quail';
+
+  @override
+  String get speciesPigeon => 'Pigeon';
+
+  @override
+  String get speciesFox => 'Fox';
+
+  @override
+  String get modalityMonteria => 'Driven hunt (montería)';
+
+  @override
+  String get modalityBatida => 'Beat (batida)';
+
+  @override
+  String get modalityStalking => 'Stalking';
+
+  @override
+  String get modalityWaiting => 'Waiting hunt';
+
+  @override
+  String get modalitySmallGame => 'Small game';
+
+  @override
+  String get modalityOther => 'Other';
+
+  @override
+  String get zoneSaved => 'Area saved';
+
+  @override
+  String get zoneNotFound => 'This area no longer exists.';
 }

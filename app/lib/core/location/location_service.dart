@@ -50,6 +50,17 @@ class LocationService {
     }
   }
 
+  /// Last position the phone knows, without waiting for the GPS.
+  /// Null if there is none or no permission.
+  Future<Position?> lastKnownPosition() async {
+    if (!await ensurePermission()) return null;
+    try {
+      return await Geolocator.getLastKnownPosition();
+    } catch (_) {
+      return null;
+    }
+  }
+
   /// Continuous positions, for recording routes.
   Stream<Position> positionStream({int distanceFilterMeters = 5}) {
     return Geolocator.getPositionStream(
@@ -64,3 +75,8 @@ class LocationService {
 }
 
 final locationServiceProvider = Provider((ref) => LocationService());
+
+/// True when the app may read the GPS. Asks once; invalidate it to ask again.
+final locationPermissionProvider = FutureProvider<bool>(
+  (ref) => ref.watch(locationServiceProvider).ensurePermission(),
+);
