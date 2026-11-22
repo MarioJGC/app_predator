@@ -7,8 +7,12 @@ build/
 # Supabase
 supabase/.branches/
 supabase/.temp/
-# Secretos
+# Secretos (claves de Supabase, etc.)
 .env
+.env.*
+!.env.example
+*.env
+!*.env.example
 *.keystore
 *.jks
 key.properties
