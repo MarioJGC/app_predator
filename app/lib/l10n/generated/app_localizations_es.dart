@@ -568,4 +568,119 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get signTracks => 'Rastros';
+
+  @override
+  String get account => 'Tu cuenta';
+
+  @override
+  String get noAccountTitle => 'Todavía no has entrado';
+
+  @override
+  String get noAccountMessage =>
+      'Entra con tu número de teléfono para compartir zonas y hacer jornadas en grupo. Sin cuenta, la app sigue funcionando en este móvil.';
+
+  @override
+  String get signInWithPhone => 'Entrar con mi teléfono';
+
+  @override
+  String get accountsUnavailable =>
+      'Las cuentas no están disponibles en esta versión de la app.';
+
+  @override
+  String get phoneTitle => 'Tu número de teléfono';
+
+  @override
+  String get phoneExplanation =>
+      'Te enviaremos un SMS con un código. No hace falta contraseña.';
+
+  @override
+  String get countryCode => 'Prefijo';
+
+  @override
+  String get phoneNumber => 'Número de teléfono';
+
+  @override
+  String get sendCode => 'Enviar código';
+
+  @override
+  String get phoneInvalid => 'Escribe un número de teléfono válido.';
+
+  @override
+  String get codeTitle => 'Escribe el código';
+
+  @override
+  String codeSentTo(String phone) {
+    return 'Te hemos enviado un SMS con un código de 6 cifras al $phone.';
+  }
+
+  @override
+  String get code => 'Código';
+
+  @override
+  String get signIn => 'Entrar';
+
+  @override
+  String get changeNumber => 'Cambiar número';
+
+  @override
+  String get resendCode => 'Reenviar código';
+
+  @override
+  String resendIn(int seconds) {
+    return 'Podrás reenviar el código en $seconds s';
+  }
+
+  @override
+  String get codeInvalid => 'El código no es correcto o ha caducado.';
+
+  @override
+  String get noConnection => 'Sin conexión. Inténtalo cuando tengas cobertura.';
+
+  @override
+  String get tooManyAttempts => 'Demasiados intentos. Espera unos minutos.';
+
+  @override
+  String get authError => 'No se pudo entrar. Inténtalo de nuevo.';
+
+  @override
+  String get testLoginHint =>
+      'Modo pruebas: usa el prefijo +34, el número 600 000 001 y el código 123456.';
+
+  @override
+  String get nameTitle => '¿Cómo te llamas?';
+
+  @override
+  String get nameExplanation => 'Así te verán los demás cazadores de tu grupo.';
+
+  @override
+  String get yourName => 'Tu nombre';
+
+  @override
+  String get nameRequired => 'Escribe tu nombre';
+
+  @override
+  String signedInAs(String name) {
+    return 'Has entrado como $name';
+  }
+
+  @override
+  String get noName => 'Sin nombre';
+
+  @override
+  String get changeName => 'Cambiar nombre';
+
+  @override
+  String get signOut => 'Cerrar sesión';
+
+  @override
+  String get signOutQuestion => '¿Cerrar sesión?';
+
+  @override
+  String get signOutMessage => 'Tus zonas y capturas se quedan en este móvil.';
+
+  @override
+  String get phoneLabel => 'Teléfono';
+
+  @override
+  String get nameLabel => 'Nombre';
 }

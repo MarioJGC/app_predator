@@ -567,4 +567,120 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get signTracks => 'Tracks';
+
+  @override
+  String get account => 'Your account';
+
+  @override
+  String get noAccountTitle => 'You haven\'t signed in yet';
+
+  @override
+  String get noAccountMessage =>
+      'Sign in with your phone number to share areas and hunt with your group. Without an account, the app still works on this phone.';
+
+  @override
+  String get signInWithPhone => 'Sign in with my phone';
+
+  @override
+  String get accountsUnavailable =>
+      'Accounts are not available in this version of the app.';
+
+  @override
+  String get phoneTitle => 'Your phone number';
+
+  @override
+  String get phoneExplanation =>
+      'We\'ll send you a text message with a code. No password needed.';
+
+  @override
+  String get countryCode => 'Country code';
+
+  @override
+  String get phoneNumber => 'Phone number';
+
+  @override
+  String get sendCode => 'Send code';
+
+  @override
+  String get phoneInvalid => 'Enter a valid phone number.';
+
+  @override
+  String get codeTitle => 'Enter the code';
+
+  @override
+  String codeSentTo(String phone) {
+    return 'We sent a text message with a 6-digit code to $phone.';
+  }
+
+  @override
+  String get code => 'Code';
+
+  @override
+  String get signIn => 'Sign in';
+
+  @override
+  String get changeNumber => 'Change number';
+
+  @override
+  String get resendCode => 'Send the code again';
+
+  @override
+  String resendIn(int seconds) {
+    return 'You can resend the code in $seconds s';
+  }
+
+  @override
+  String get codeInvalid => 'The code is wrong or has expired.';
+
+  @override
+  String get noConnection => 'No connection. Try again when you have signal.';
+
+  @override
+  String get tooManyAttempts => 'Too many attempts. Wait a few minutes.';
+
+  @override
+  String get authError => 'Couldn\'t sign in. Try again.';
+
+  @override
+  String get testLoginHint =>
+      'Test mode: use country code +34, number 600 000 001 and code 123456.';
+
+  @override
+  String get nameTitle => 'What\'s your name?';
+
+  @override
+  String get nameExplanation =>
+      'Other hunters in your group will see this name.';
+
+  @override
+  String get yourName => 'Your name';
+
+  @override
+  String get nameRequired => 'Enter your name';
+
+  @override
+  String signedInAs(String name) {
+    return 'Signed in as $name';
+  }
+
+  @override
+  String get noName => 'No name';
+
+  @override
+  String get changeName => 'Change name';
+
+  @override
+  String get signOut => 'Sign out';
+
+  @override
+  String get signOutQuestion => 'Sign out?';
+
+  @override
+  String get signOutMessage => 'Your areas and game log stay on this phone.';
+
+  @override
+  String get phoneLabel => 'Phone';
+
+  @override
+  String get nameLabel => 'Name';
 }
