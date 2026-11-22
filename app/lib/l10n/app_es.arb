@@ -286,5 +286,61 @@
         "type": "String"
       }
     }
+  },
+  "account": "Tu cuenta",
+  "noAccountTitle": "Todavía no has entrado",
+  "noAccountMessage": "Entra con tu número de teléfono para compartir zonas y hacer jornadas en grupo. Sin cuenta, la app sigue funcionando en este móvil.",
+  "signInWithPhone": "Entrar con mi teléfono",
+  "accountsUnavailable": "Las cuentas no están disponibles en esta versión de la app.",
+  "phoneTitle": "Tu número de teléfono",
+  "phoneExplanation": "Te enviaremos un SMS con un código. No hace falta contraseña.",
+  "countryCode": "Prefijo",
+  "phoneNumber": "Número de teléfono",
+  "sendCode": "Enviar código",
+  "phoneInvalid": "Escribe un número de teléfono válido.",
+  "codeTitle": "Escribe el código",
+  "codeSentTo": "Te hemos enviado un SMS con un código de 6 cifras al {phone}.",
+  "code": "Código",
+  "signIn": "Entrar",
+  "changeNumber": "Cambiar número",
+  "resendCode": "Reenviar código",
+  "resendIn": "Podrás reenviar el código en {seconds} s",
+  "codeInvalid": "El código no es correcto o ha caducado.",
+  "noConnection": "Sin conexión. Inténtalo cuando tengas cobertura.",
+  "tooManyAttempts": "Demasiados intentos. Espera unos minutos.",
+  "authError": "No se pudo entrar. Inténtalo de nuevo.",
+  "testLoginHint": "Modo pruebas: usa el prefijo +34, el número 600 000 001 y el código 123456.",
+  "nameTitle": "¿Cómo te llamas?",
+  "nameExplanation": "Así te verán los demás cazadores de tu grupo.",
+  "yourName": "Tu nombre",
+  "nameRequired": "Escribe tu nombre",
+  "signedInAs": "Has entrado como {name}",
+  "noName": "Sin nombre",
+  "changeName": "Cambiar nombre",
+  "signOut": "Cerrar sesión",
+  "signOutQuestion": "¿Cerrar sesión?",
+  "signOutMessage": "Tus zonas y capturas se quedan en este móvil.",
+  "phoneLabel": "Teléfono",
+  "nameLabel": "Nombre",
+  "@codeSentTo": {
+    "placeholders": {
+      "phone": {
+        "type": "String"
+      }
+    }
+  },
+  "@resendIn": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "@signedInAs": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
   }
 }

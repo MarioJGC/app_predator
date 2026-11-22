@@ -1129,6 +1129,216 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Rastros'**
   String get signTracks;
+
+  /// No description provided for @account.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu cuenta'**
+  String get account;
+
+  /// No description provided for @noAccountTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Todavía no has entrado'**
+  String get noAccountTitle;
+
+  /// No description provided for @noAccountMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'Entra con tu número de teléfono para compartir zonas y hacer jornadas en grupo. Sin cuenta, la app sigue funcionando en este móvil.'**
+  String get noAccountMessage;
+
+  /// No description provided for @signInWithPhone.
+  ///
+  /// In es, this message translates to:
+  /// **'Entrar con mi teléfono'**
+  String get signInWithPhone;
+
+  /// No description provided for @accountsUnavailable.
+  ///
+  /// In es, this message translates to:
+  /// **'Las cuentas no están disponibles en esta versión de la app.'**
+  String get accountsUnavailable;
+
+  /// No description provided for @phoneTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu número de teléfono'**
+  String get phoneTitle;
+
+  /// No description provided for @phoneExplanation.
+  ///
+  /// In es, this message translates to:
+  /// **'Te enviaremos un SMS con un código. No hace falta contraseña.'**
+  String get phoneExplanation;
+
+  /// No description provided for @countryCode.
+  ///
+  /// In es, this message translates to:
+  /// **'Prefijo'**
+  String get countryCode;
+
+  /// No description provided for @phoneNumber.
+  ///
+  /// In es, this message translates to:
+  /// **'Número de teléfono'**
+  String get phoneNumber;
+
+  /// No description provided for @sendCode.
+  ///
+  /// In es, this message translates to:
+  /// **'Enviar código'**
+  String get sendCode;
+
+  /// No description provided for @phoneInvalid.
+  ///
+  /// In es, this message translates to:
+  /// **'Escribe un número de teléfono válido.'**
+  String get phoneInvalid;
+
+  /// No description provided for @codeTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Escribe el código'**
+  String get codeTitle;
+
+  /// No description provided for @codeSentTo.
+  ///
+  /// In es, this message translates to:
+  /// **'Te hemos enviado un SMS con un código de 6 cifras al {phone}.'**
+  String codeSentTo(String phone);
+
+  /// No description provided for @code.
+  ///
+  /// In es, this message translates to:
+  /// **'Código'**
+  String get code;
+
+  /// No description provided for @signIn.
+  ///
+  /// In es, this message translates to:
+  /// **'Entrar'**
+  String get signIn;
+
+  /// No description provided for @changeNumber.
+  ///
+  /// In es, this message translates to:
+  /// **'Cambiar número'**
+  String get changeNumber;
+
+  /// No description provided for @resendCode.
+  ///
+  /// In es, this message translates to:
+  /// **'Reenviar código'**
+  String get resendCode;
+
+  /// No description provided for @resendIn.
+  ///
+  /// In es, this message translates to:
+  /// **'Podrás reenviar el código en {seconds} s'**
+  String resendIn(int seconds);
+
+  /// No description provided for @codeInvalid.
+  ///
+  /// In es, this message translates to:
+  /// **'El código no es correcto o ha caducado.'**
+  String get codeInvalid;
+
+  /// No description provided for @noConnection.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin conexión. Inténtalo cuando tengas cobertura.'**
+  String get noConnection;
+
+  /// No description provided for @tooManyAttempts.
+  ///
+  /// In es, this message translates to:
+  /// **'Demasiados intentos. Espera unos minutos.'**
+  String get tooManyAttempts;
+
+  /// No description provided for @authError.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pudo entrar. Inténtalo de nuevo.'**
+  String get authError;
+
+  /// No description provided for @testLoginHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Modo pruebas: usa el prefijo +34, el número 600 000 001 y el código 123456.'**
+  String get testLoginHint;
+
+  /// No description provided for @nameTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Cómo te llamas?'**
+  String get nameTitle;
+
+  /// No description provided for @nameExplanation.
+  ///
+  /// In es, this message translates to:
+  /// **'Así te verán los demás cazadores de tu grupo.'**
+  String get nameExplanation;
+
+  /// No description provided for @yourName.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu nombre'**
+  String get yourName;
+
+  /// No description provided for @nameRequired.
+  ///
+  /// In es, this message translates to:
+  /// **'Escribe tu nombre'**
+  String get nameRequired;
+
+  /// No description provided for @signedInAs.
+  ///
+  /// In es, this message translates to:
+  /// **'Has entrado como {name}'**
+  String signedInAs(String name);
+
+  /// No description provided for @noName.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin nombre'**
+  String get noName;
+
+  /// No description provided for @changeName.
+  ///
+  /// In es, this message translates to:
+  /// **'Cambiar nombre'**
+  String get changeName;
+
+  /// No description provided for @signOut.
+  ///
+  /// In es, this message translates to:
+  /// **'Cerrar sesión'**
+  String get signOut;
+
+  /// No description provided for @signOutQuestion.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Cerrar sesión?'**
+  String get signOutQuestion;
+
+  /// No description provided for @signOutMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'Tus zonas y capturas se quedan en este móvil.'**
+  String get signOutMessage;
+
+  /// No description provided for @phoneLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Teléfono'**
+  String get phoneLabel;
+
+  /// No description provided for @nameLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Nombre'**
+  String get nameLabel;
 }
 
 class _AppLocalizationsDelegate
