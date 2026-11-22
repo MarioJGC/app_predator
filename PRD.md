@@ -240,7 +240,7 @@ Orden propuesto de construcción del MVP (una rama `feature/*` por línea):
 ## 11. Preguntas abiertas
 
 1. ¿Los participantes de una jornada se ven entre sí o solo los ve el organizador? (RF-55)
-2. ¿Qué cuatro pestañas fijas habrá? Propuesta: **Mapa · Mis zonas · Grupos · Jornada**.
+2. ~~¿Qué cuatro pestañas fijas habrá?~~ **Decidido:** Mapa · Mis zonas · Grupos · Jornada. Mientras no haya backend, «Jornada» muestra «Mis capturas».
 3. Nombre comercial y dominio definitivos (afecta a los enlaces de invitación).
 4. Proveedor de SMS: Twilio, Prelude/Vonage o WhatsApp.
 5. ¿Cuáles serán las cuadrillas o cotos del piloto y en qué provincias? (Determina qué mapas se precargan.)

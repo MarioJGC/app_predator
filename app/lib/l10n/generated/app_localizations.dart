@@ -667,6 +667,132 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Espacio usado: {size}'**
   String offlineMapsTotal(String size);
+
+  /// No description provided for @liveHunt.
+  ///
+  /// In es, this message translates to:
+  /// **'Jornada en grupo'**
+  String get liveHunt;
+
+  /// No description provided for @myCaptures.
+  ///
+  /// In es, this message translates to:
+  /// **'Mis capturas'**
+  String get myCaptures;
+
+  /// No description provided for @newCapture.
+  ///
+  /// In es, this message translates to:
+  /// **'Registrar captura'**
+  String get newCapture;
+
+  /// No description provided for @capturesEmpty.
+  ///
+  /// In es, this message translates to:
+  /// **'Todavía no has registrado capturas.'**
+  String get capturesEmpty;
+
+  /// No description provided for @captureSpecies.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Qué especie?'**
+  String get captureSpecies;
+
+  /// No description provided for @captureCount.
+  ///
+  /// In es, this message translates to:
+  /// **'Cantidad'**
+  String get captureCount;
+
+  /// No description provided for @less.
+  ///
+  /// In es, this message translates to:
+  /// **'Menos'**
+  String get less;
+
+  /// No description provided for @more.
+  ///
+  /// In es, this message translates to:
+  /// **'Más'**
+  String get more;
+
+  /// No description provided for @takePhoto.
+  ///
+  /// In es, this message translates to:
+  /// **'Hacer foto (opcional)'**
+  String get takePhoto;
+
+  /// No description provided for @retakePhoto.
+  ///
+  /// In es, this message translates to:
+  /// **'Repetir foto'**
+  String get retakePhoto;
+
+  /// No description provided for @removePhoto.
+  ///
+  /// In es, this message translates to:
+  /// **'Quitar foto'**
+  String get removePhoto;
+
+  /// No description provided for @captureNotes.
+  ///
+  /// In es, this message translates to:
+  /// **'Notas (opcional)'**
+  String get captureNotes;
+
+  /// No description provided for @gettingLocation.
+  ///
+  /// In es, this message translates to:
+  /// **'Buscando tu ubicación…'**
+  String get gettingLocation;
+
+  /// No description provided for @locationSaved.
+  ///
+  /// In es, this message translates to:
+  /// **'Se guardará el lugar donde estás ahora.'**
+  String get locationSaved;
+
+  /// No description provided for @locationNotAvailable.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin ubicación: no se pudo usar el GPS.'**
+  String get locationNotAvailable;
+
+  /// No description provided for @captureSaved.
+  ///
+  /// In es, this message translates to:
+  /// **'Captura guardada'**
+  String get captureSaved;
+
+  /// No description provided for @captureTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'{species} × {count}'**
+  String captureTitle(String species, int count);
+
+  /// No description provided for @deleteCapture.
+  ///
+  /// In es, this message translates to:
+  /// **'Borrar captura'**
+  String get deleteCapture;
+
+  /// No description provided for @deleteCaptureQuestion.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Borrar esta captura?'**
+  String get deleteCaptureQuestion;
+
+  /// No description provided for @captureNotFound.
+  ///
+  /// In es, this message translates to:
+  /// **'Esta captura ya no existe.'**
+  String get captureNotFound;
+
+  /// No description provided for @photoError.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pudo guardar la foto.'**
+  String get photoError;
 }
 
 class _AppLocalizationsDelegate

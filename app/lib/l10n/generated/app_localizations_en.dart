@@ -317,4 +317,69 @@ class AppLocalizationsEn extends AppLocalizations {
   String offlineMapsTotal(String size) {
     return 'Space used: $size';
   }
+
+  @override
+  String get liveHunt => 'Group hunt';
+
+  @override
+  String get myCaptures => 'My game';
+
+  @override
+  String get newCapture => 'Log game';
+
+  @override
+  String get capturesEmpty => 'You haven\'t logged any game yet.';
+
+  @override
+  String get captureSpecies => 'Which species?';
+
+  @override
+  String get captureCount => 'How many';
+
+  @override
+  String get less => 'Less';
+
+  @override
+  String get more => 'More';
+
+  @override
+  String get takePhoto => 'Take photo (optional)';
+
+  @override
+  String get retakePhoto => 'Retake photo';
+
+  @override
+  String get removePhoto => 'Remove photo';
+
+  @override
+  String get captureNotes => 'Notes (optional)';
+
+  @override
+  String get gettingLocation => 'Finding your location…';
+
+  @override
+  String get locationSaved => 'The place where you are now will be saved.';
+
+  @override
+  String get locationNotAvailable => 'No location: GPS could not be used.';
+
+  @override
+  String get captureSaved => 'Game logged';
+
+  @override
+  String captureTitle(String species, int count) {
+    return '$species × $count';
+  }
+
+  @override
+  String get deleteCapture => 'Delete entry';
+
+  @override
+  String get deleteCaptureQuestion => 'Delete this entry?';
+
+  @override
+  String get captureNotFound => 'This entry no longer exists.';
+
+  @override
+  String get photoError => 'Couldn\'t save the photo.';
 }
