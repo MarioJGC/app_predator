@@ -1132,6 +1132,666 @@ class ZonePointsCompanion extends UpdateCompanion<ZonePointRow> {
   }
 }
 
+class $CapturesTable extends Captures
+    with TableInfo<$CapturesTable, CaptureRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $CapturesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _speciesMeta = const VerificationMeta(
+    'species',
+  );
+  @override
+  late final GeneratedColumn<String> species = GeneratedColumn<String>(
+    'species',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _countMeta = const VerificationMeta('count');
+  @override
+  late final GeneratedColumn<int> count = GeneratedColumn<int>(
+    'count',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(1),
+  );
+  static const VerificationMeta _photoPathMeta = const VerificationMeta(
+    'photoPath',
+  );
+  @override
+  late final GeneratedColumn<String> photoPath = GeneratedColumn<String>(
+    'photo_path',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _latitudeMeta = const VerificationMeta(
+    'latitude',
+  );
+  @override
+  late final GeneratedColumn<double> latitude = GeneratedColumn<double>(
+    'latitude',
+    aliasedName,
+    true,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _longitudeMeta = const VerificationMeta(
+    'longitude',
+  );
+  @override
+  late final GeneratedColumn<double> longitude = GeneratedColumn<double>(
+    'longitude',
+    aliasedName,
+    true,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _notesMeta = const VerificationMeta('notes');
+  @override
+  late final GeneratedColumn<String> notes = GeneratedColumn<String>(
+    'notes',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _takenAtMeta = const VerificationMeta(
+    'takenAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> takenAt = GeneratedColumn<DateTime>(
+    'taken_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _huntIdMeta = const VerificationMeta('huntId');
+  @override
+  late final GeneratedColumn<String> huntId = GeneratedColumn<String>(
+    'hunt_id',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
+    'updatedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+    'updated_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _deletedAtMeta = const VerificationMeta(
+    'deletedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> deletedAt = GeneratedColumn<DateTime>(
+    'deleted_at',
+    aliasedName,
+    true,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    species,
+    count,
+    photoPath,
+    latitude,
+    longitude,
+    notes,
+    takenAt,
+    huntId,
+    updatedAt,
+    deletedAt,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'captures';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<CaptureRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('species')) {
+      context.handle(
+        _speciesMeta,
+        species.isAcceptableOrUnknown(data['species']!, _speciesMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_speciesMeta);
+    }
+    if (data.containsKey('count')) {
+      context.handle(
+        _countMeta,
+        count.isAcceptableOrUnknown(data['count']!, _countMeta),
+      );
+    }
+    if (data.containsKey('photo_path')) {
+      context.handle(
+        _photoPathMeta,
+        photoPath.isAcceptableOrUnknown(data['photo_path']!, _photoPathMeta),
+      );
+    }
+    if (data.containsKey('latitude')) {
+      context.handle(
+        _latitudeMeta,
+        latitude.isAcceptableOrUnknown(data['latitude']!, _latitudeMeta),
+      );
+    }
+    if (data.containsKey('longitude')) {
+      context.handle(
+        _longitudeMeta,
+        longitude.isAcceptableOrUnknown(data['longitude']!, _longitudeMeta),
+      );
+    }
+    if (data.containsKey('notes')) {
+      context.handle(
+        _notesMeta,
+        notes.isAcceptableOrUnknown(data['notes']!, _notesMeta),
+      );
+    }
+    if (data.containsKey('taken_at')) {
+      context.handle(
+        _takenAtMeta,
+        takenAt.isAcceptableOrUnknown(data['taken_at']!, _takenAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_takenAtMeta);
+    }
+    if (data.containsKey('hunt_id')) {
+      context.handle(
+        _huntIdMeta,
+        huntId.isAcceptableOrUnknown(data['hunt_id']!, _huntIdMeta),
+      );
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(
+        _updatedAtMeta,
+        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_updatedAtMeta);
+    }
+    if (data.containsKey('deleted_at')) {
+      context.handle(
+        _deletedAtMeta,
+        deletedAt.isAcceptableOrUnknown(data['deleted_at']!, _deletedAtMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  CaptureRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return CaptureRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      species: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}species'],
+      )!,
+      count: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}count'],
+      )!,
+      photoPath: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}photo_path'],
+      ),
+      latitude: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}latitude'],
+      ),
+      longitude: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}longitude'],
+      ),
+      notes: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}notes'],
+      ),
+      takenAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}taken_at'],
+      )!,
+      huntId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}hunt_id'],
+      ),
+      updatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}updated_at'],
+      )!,
+      deletedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}deleted_at'],
+      ),
+    );
+  }
+
+  @override
+  $CapturesTable createAlias(String alias) {
+    return $CapturesTable(attachedDatabase, alias);
+  }
+}
+
+class CaptureRow extends DataClass implements Insertable<CaptureRow> {
+  final String id;
+
+  /// Species key, e.g. 'wild_boar'.
+  final String species;
+  final int count;
+
+  /// Local file path of the compressed photo (no EXIF).
+  final String? photoPath;
+  final double? latitude;
+  final double? longitude;
+  final String? notes;
+  final DateTime takenAt;
+
+  /// Live hunt it belongs to. Filled when hunts exist (backend).
+  final String? huntId;
+  final DateTime updatedAt;
+  final DateTime? deletedAt;
+  const CaptureRow({
+    required this.id,
+    required this.species,
+    required this.count,
+    this.photoPath,
+    this.latitude,
+    this.longitude,
+    this.notes,
+    required this.takenAt,
+    this.huntId,
+    required this.updatedAt,
+    this.deletedAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['species'] = Variable<String>(species);
+    map['count'] = Variable<int>(count);
+    if (!nullToAbsent || photoPath != null) {
+      map['photo_path'] = Variable<String>(photoPath);
+    }
+    if (!nullToAbsent || latitude != null) {
+      map['latitude'] = Variable<double>(latitude);
+    }
+    if (!nullToAbsent || longitude != null) {
+      map['longitude'] = Variable<double>(longitude);
+    }
+    if (!nullToAbsent || notes != null) {
+      map['notes'] = Variable<String>(notes);
+    }
+    map['taken_at'] = Variable<DateTime>(takenAt);
+    if (!nullToAbsent || huntId != null) {
+      map['hunt_id'] = Variable<String>(huntId);
+    }
+    map['updated_at'] = Variable<DateTime>(updatedAt);
+    if (!nullToAbsent || deletedAt != null) {
+      map['deleted_at'] = Variable<DateTime>(deletedAt);
+    }
+    return map;
+  }
+
+  CapturesCompanion toCompanion(bool nullToAbsent) {
+    return CapturesCompanion(
+      id: Value(id),
+      species: Value(species),
+      count: Value(count),
+      photoPath: photoPath == null && nullToAbsent
+          ? const Value.absent()
+          : Value(photoPath),
+      latitude: latitude == null && nullToAbsent
+          ? const Value.absent()
+          : Value(latitude),
+      longitude: longitude == null && nullToAbsent
+          ? const Value.absent()
+          : Value(longitude),
+      notes: notes == null && nullToAbsent
+          ? const Value.absent()
+          : Value(notes),
+      takenAt: Value(takenAt),
+      huntId: huntId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(huntId),
+      updatedAt: Value(updatedAt),
+      deletedAt: deletedAt == null && nullToAbsent
+          ? const Value.absent()
+          : Value(deletedAt),
+    );
+  }
+
+  factory CaptureRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return CaptureRow(
+      id: serializer.fromJson<String>(json['id']),
+      species: serializer.fromJson<String>(json['species']),
+      count: serializer.fromJson<int>(json['count']),
+      photoPath: serializer.fromJson<String?>(json['photoPath']),
+      latitude: serializer.fromJson<double?>(json['latitude']),
+      longitude: serializer.fromJson<double?>(json['longitude']),
+      notes: serializer.fromJson<String?>(json['notes']),
+      takenAt: serializer.fromJson<DateTime>(json['takenAt']),
+      huntId: serializer.fromJson<String?>(json['huntId']),
+      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+      deletedAt: serializer.fromJson<DateTime?>(json['deletedAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'species': serializer.toJson<String>(species),
+      'count': serializer.toJson<int>(count),
+      'photoPath': serializer.toJson<String?>(photoPath),
+      'latitude': serializer.toJson<double?>(latitude),
+      'longitude': serializer.toJson<double?>(longitude),
+      'notes': serializer.toJson<String?>(notes),
+      'takenAt': serializer.toJson<DateTime>(takenAt),
+      'huntId': serializer.toJson<String?>(huntId),
+      'updatedAt': serializer.toJson<DateTime>(updatedAt),
+      'deletedAt': serializer.toJson<DateTime?>(deletedAt),
+    };
+  }
+
+  CaptureRow copyWith({
+    String? id,
+    String? species,
+    int? count,
+    Value<String?> photoPath = const Value.absent(),
+    Value<double?> latitude = const Value.absent(),
+    Value<double?> longitude = const Value.absent(),
+    Value<String?> notes = const Value.absent(),
+    DateTime? takenAt,
+    Value<String?> huntId = const Value.absent(),
+    DateTime? updatedAt,
+    Value<DateTime?> deletedAt = const Value.absent(),
+  }) => CaptureRow(
+    id: id ?? this.id,
+    species: species ?? this.species,
+    count: count ?? this.count,
+    photoPath: photoPath.present ? photoPath.value : this.photoPath,
+    latitude: latitude.present ? latitude.value : this.latitude,
+    longitude: longitude.present ? longitude.value : this.longitude,
+    notes: notes.present ? notes.value : this.notes,
+    takenAt: takenAt ?? this.takenAt,
+    huntId: huntId.present ? huntId.value : this.huntId,
+    updatedAt: updatedAt ?? this.updatedAt,
+    deletedAt: deletedAt.present ? deletedAt.value : this.deletedAt,
+  );
+  CaptureRow copyWithCompanion(CapturesCompanion data) {
+    return CaptureRow(
+      id: data.id.present ? data.id.value : this.id,
+      species: data.species.present ? data.species.value : this.species,
+      count: data.count.present ? data.count.value : this.count,
+      photoPath: data.photoPath.present ? data.photoPath.value : this.photoPath,
+      latitude: data.latitude.present ? data.latitude.value : this.latitude,
+      longitude: data.longitude.present ? data.longitude.value : this.longitude,
+      notes: data.notes.present ? data.notes.value : this.notes,
+      takenAt: data.takenAt.present ? data.takenAt.value : this.takenAt,
+      huntId: data.huntId.present ? data.huntId.value : this.huntId,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+      deletedAt: data.deletedAt.present ? data.deletedAt.value : this.deletedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('CaptureRow(')
+          ..write('id: $id, ')
+          ..write('species: $species, ')
+          ..write('count: $count, ')
+          ..write('photoPath: $photoPath, ')
+          ..write('latitude: $latitude, ')
+          ..write('longitude: $longitude, ')
+          ..write('notes: $notes, ')
+          ..write('takenAt: $takenAt, ')
+          ..write('huntId: $huntId, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('deletedAt: $deletedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    species,
+    count,
+    photoPath,
+    latitude,
+    longitude,
+    notes,
+    takenAt,
+    huntId,
+    updatedAt,
+    deletedAt,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is CaptureRow &&
+          other.id == this.id &&
+          other.species == this.species &&
+          other.count == this.count &&
+          other.photoPath == this.photoPath &&
+          other.latitude == this.latitude &&
+          other.longitude == this.longitude &&
+          other.notes == this.notes &&
+          other.takenAt == this.takenAt &&
+          other.huntId == this.huntId &&
+          other.updatedAt == this.updatedAt &&
+          other.deletedAt == this.deletedAt);
+}
+
+class CapturesCompanion extends UpdateCompanion<CaptureRow> {
+  final Value<String> id;
+  final Value<String> species;
+  final Value<int> count;
+  final Value<String?> photoPath;
+  final Value<double?> latitude;
+  final Value<double?> longitude;
+  final Value<String?> notes;
+  final Value<DateTime> takenAt;
+  final Value<String?> huntId;
+  final Value<DateTime> updatedAt;
+  final Value<DateTime?> deletedAt;
+  final Value<int> rowid;
+  const CapturesCompanion({
+    this.id = const Value.absent(),
+    this.species = const Value.absent(),
+    this.count = const Value.absent(),
+    this.photoPath = const Value.absent(),
+    this.latitude = const Value.absent(),
+    this.longitude = const Value.absent(),
+    this.notes = const Value.absent(),
+    this.takenAt = const Value.absent(),
+    this.huntId = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.deletedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  CapturesCompanion.insert({
+    required String id,
+    required String species,
+    this.count = const Value.absent(),
+    this.photoPath = const Value.absent(),
+    this.latitude = const Value.absent(),
+    this.longitude = const Value.absent(),
+    this.notes = const Value.absent(),
+    required DateTime takenAt,
+    this.huntId = const Value.absent(),
+    required DateTime updatedAt,
+    this.deletedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : id = Value(id),
+       species = Value(species),
+       takenAt = Value(takenAt),
+       updatedAt = Value(updatedAt);
+  static Insertable<CaptureRow> custom({
+    Expression<String>? id,
+    Expression<String>? species,
+    Expression<int>? count,
+    Expression<String>? photoPath,
+    Expression<double>? latitude,
+    Expression<double>? longitude,
+    Expression<String>? notes,
+    Expression<DateTime>? takenAt,
+    Expression<String>? huntId,
+    Expression<DateTime>? updatedAt,
+    Expression<DateTime>? deletedAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (species != null) 'species': species,
+      if (count != null) 'count': count,
+      if (photoPath != null) 'photo_path': photoPath,
+      if (latitude != null) 'latitude': latitude,
+      if (longitude != null) 'longitude': longitude,
+      if (notes != null) 'notes': notes,
+      if (takenAt != null) 'taken_at': takenAt,
+      if (huntId != null) 'hunt_id': huntId,
+      if (updatedAt != null) 'updated_at': updatedAt,
+      if (deletedAt != null) 'deleted_at': deletedAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  CapturesCompanion copyWith({
+    Value<String>? id,
+    Value<String>? species,
+    Value<int>? count,
+    Value<String?>? photoPath,
+    Value<double?>? latitude,
+    Value<double?>? longitude,
+    Value<String?>? notes,
+    Value<DateTime>? takenAt,
+    Value<String?>? huntId,
+    Value<DateTime>? updatedAt,
+    Value<DateTime?>? deletedAt,
+    Value<int>? rowid,
+  }) {
+    return CapturesCompanion(
+      id: id ?? this.id,
+      species: species ?? this.species,
+      count: count ?? this.count,
+      photoPath: photoPath ?? this.photoPath,
+      latitude: latitude ?? this.latitude,
+      longitude: longitude ?? this.longitude,
+      notes: notes ?? this.notes,
+      takenAt: takenAt ?? this.takenAt,
+      huntId: huntId ?? this.huntId,
+      updatedAt: updatedAt ?? this.updatedAt,
+      deletedAt: deletedAt ?? this.deletedAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (species.present) {
+      map['species'] = Variable<String>(species.value);
+    }
+    if (count.present) {
+      map['count'] = Variable<int>(count.value);
+    }
+    if (photoPath.present) {
+      map['photo_path'] = Variable<String>(photoPath.value);
+    }
+    if (latitude.present) {
+      map['latitude'] = Variable<double>(latitude.value);
+    }
+    if (longitude.present) {
+      map['longitude'] = Variable<double>(longitude.value);
+    }
+    if (notes.present) {
+      map['notes'] = Variable<String>(notes.value);
+    }
+    if (takenAt.present) {
+      map['taken_at'] = Variable<DateTime>(takenAt.value);
+    }
+    if (huntId.present) {
+      map['hunt_id'] = Variable<String>(huntId.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+    }
+    if (deletedAt.present) {
+      map['deleted_at'] = Variable<DateTime>(deletedAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('CapturesCompanion(')
+          ..write('id: $id, ')
+          ..write('species: $species, ')
+          ..write('count: $count, ')
+          ..write('photoPath: $photoPath, ')
+          ..write('latitude: $latitude, ')
+          ..write('longitude: $longitude, ')
+          ..write('notes: $notes, ')
+          ..write('takenAt: $takenAt, ')
+          ..write('huntId: $huntId, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('deletedAt: $deletedAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 class $SyncQueueTable extends SyncQueue
     with TableInfo<$SyncQueueTable, SyncQueueRow> {
   @override
@@ -1491,6 +2151,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
   late final $ZonesTable zones = $ZonesTable(this);
   late final $ZonePointsTable zonePoints = $ZonePointsTable(this);
+  late final $CapturesTable captures = $CapturesTable(this);
   late final $SyncQueueTable syncQueue = $SyncQueueTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
@@ -1499,6 +2160,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   List<DatabaseSchemaEntity> get allSchemaEntities => [
     zones,
     zonePoints,
+    captures,
     syncQueue,
   ];
 }
@@ -2265,6 +2927,324 @@ typedef $$ZonePointsTableProcessedTableManager =
       ZonePointRow,
       PrefetchHooks Function({bool zoneId})
     >;
+typedef $$CapturesTableCreateCompanionBuilder = CapturesCompanion Function({
+  required String id,
+  required String species,
+  Value<int> count,
+  Value<String?> photoPath,
+  Value<double?> latitude,
+  Value<double?> longitude,
+  Value<String?> notes,
+  required DateTime takenAt,
+  Value<String?> huntId,
+  required DateTime updatedAt,
+  Value<DateTime?> deletedAt,
+  Value<int> rowid,
+});
+typedef $$CapturesTableUpdateCompanionBuilder = CapturesCompanion Function({
+  Value<String> id,
+  Value<String> species,
+  Value<int> count,
+  Value<String?> photoPath,
+  Value<double?> latitude,
+  Value<double?> longitude,
+  Value<String?> notes,
+  Value<DateTime> takenAt,
+  Value<String?> huntId,
+  Value<DateTime> updatedAt,
+  Value<DateTime?> deletedAt,
+  Value<int> rowid,
+});
+
+class $$CapturesTableFilterComposer
+    extends Composer<_$AppDatabase, $CapturesTable> {
+  $$CapturesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get species => $composableBuilder(
+    column: $table.species,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get count => $composableBuilder(
+    column: $table.count,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get photoPath => $composableBuilder(
+    column: $table.photoPath,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<double> get latitude => $composableBuilder(
+    column: $table.latitude,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<double> get longitude => $composableBuilder(
+    column: $table.longitude,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get notes => $composableBuilder(
+    column: $table.notes,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get takenAt => $composableBuilder(
+    column: $table.takenAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get huntId => $composableBuilder(
+    column: $table.huntId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get updatedAt => $composableBuilder(
+    column: $table.updatedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get deletedAt => $composableBuilder(
+    column: $table.deletedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$CapturesTableOrderingComposer
+    extends Composer<_$AppDatabase, $CapturesTable> {
+  $$CapturesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get species => $composableBuilder(
+    column: $table.species,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get count => $composableBuilder(
+    column: $table.count,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get photoPath => $composableBuilder(
+    column: $table.photoPath,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<double> get latitude => $composableBuilder(
+    column: $table.latitude,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<double> get longitude => $composableBuilder(
+    column: $table.longitude,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get notes => $composableBuilder(
+    column: $table.notes,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get takenAt => $composableBuilder(
+    column: $table.takenAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get huntId => $composableBuilder(
+    column: $table.huntId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get updatedAt => $composableBuilder(
+    column: $table.updatedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get deletedAt => $composableBuilder(
+    column: $table.deletedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$CapturesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $CapturesTable> {
+  $$CapturesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get species =>
+      $composableBuilder(column: $table.species, builder: (column) => column);
+
+  GeneratedColumn<int> get count =>
+      $composableBuilder(column: $table.count, builder: (column) => column);
+
+  GeneratedColumn<String> get photoPath =>
+      $composableBuilder(column: $table.photoPath, builder: (column) => column);
+
+  GeneratedColumn<double> get latitude =>
+      $composableBuilder(column: $table.latitude, builder: (column) => column);
+
+  GeneratedColumn<double> get longitude =>
+      $composableBuilder(column: $table.longitude, builder: (column) => column);
+
+  GeneratedColumn<String> get notes =>
+      $composableBuilder(column: $table.notes, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get takenAt =>
+      $composableBuilder(column: $table.takenAt, builder: (column) => column);
+
+  GeneratedColumn<String> get huntId =>
+      $composableBuilder(column: $table.huntId, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get updatedAt =>
+      $composableBuilder(column: $table.updatedAt, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get deletedAt =>
+      $composableBuilder(column: $table.deletedAt, builder: (column) => column);
+}
+
+class $$CapturesTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $CapturesTable,
+          CaptureRow,
+          $$CapturesTableFilterComposer,
+          $$CapturesTableOrderingComposer,
+          $$CapturesTableAnnotationComposer,
+          $$CapturesTableCreateCompanionBuilder,
+          $$CapturesTableUpdateCompanionBuilder,
+          (
+            CaptureRow,
+            BaseReferences<_$AppDatabase, $CapturesTable, CaptureRow>,
+          ),
+          CaptureRow,
+          PrefetchHooks Function()
+        > {
+  $$CapturesTableTableManager(_$AppDatabase db, $CapturesTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$CapturesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$CapturesTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$CapturesTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> id = const Value.absent(),
+                Value<String> species = const Value.absent(),
+                Value<int> count = const Value.absent(),
+                Value<String?> photoPath = const Value.absent(),
+                Value<double?> latitude = const Value.absent(),
+                Value<double?> longitude = const Value.absent(),
+                Value<String?> notes = const Value.absent(),
+                Value<DateTime> takenAt = const Value.absent(),
+                Value<String?> huntId = const Value.absent(),
+                Value<DateTime> updatedAt = const Value.absent(),
+                Value<DateTime?> deletedAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => CapturesCompanion(
+                id: id,
+                species: species,
+                count: count,
+                photoPath: photoPath,
+                latitude: latitude,
+                longitude: longitude,
+                notes: notes,
+                takenAt: takenAt,
+                huntId: huntId,
+                updatedAt: updatedAt,
+                deletedAt: deletedAt,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String id,
+                required String species,
+                Value<int> count = const Value.absent(),
+                Value<String?> photoPath = const Value.absent(),
+                Value<double?> latitude = const Value.absent(),
+                Value<double?> longitude = const Value.absent(),
+                Value<String?> notes = const Value.absent(),
+                required DateTime takenAt,
+                Value<String?> huntId = const Value.absent(),
+                required DateTime updatedAt,
+                Value<DateTime?> deletedAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => CapturesCompanion.insert(
+                id: id,
+                species: species,
+                count: count,
+                photoPath: photoPath,
+                latitude: latitude,
+                longitude: longitude,
+                notes: notes,
+                takenAt: takenAt,
+                huntId: huntId,
+                updatedAt: updatedAt,
+                deletedAt: deletedAt,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$CapturesTable, CaptureRow>(table),
+                  BaseReferences<_$AppDatabase, $CapturesTable, CaptureRow>(
+                    db,
+                    table,
+                    e,
+                  ),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$CapturesTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $CapturesTable,
+      CaptureRow,
+      $$CapturesTableFilterComposer,
+      $$CapturesTableOrderingComposer,
+      $$CapturesTableAnnotationComposer,
+      $$CapturesTableCreateCompanionBuilder,
+      $$CapturesTableUpdateCompanionBuilder,
+      (CaptureRow, BaseReferences<_$AppDatabase, $CapturesTable, CaptureRow>),
+      CaptureRow,
+      PrefetchHooks Function()
+    >;
 typedef $$SyncQueueTableCreateCompanionBuilder = SyncQueueCompanion Function({
   Value<int> id,
   required String entity,
@@ -2474,6 +3454,8 @@ class $AppDatabaseManager {
       $$ZonesTableTableManager(_db, _db.zones);
   $$ZonePointsTableTableManager get zonePoints =>
       $$ZonePointsTableTableManager(_db, _db.zonePoints);
+  $$CapturesTableTableManager get captures =>
+      $$CapturesTableTableManager(_db, _db.captures);
   $$SyncQueueTableTableManager get syncQueue =>
       $$SyncQueueTableTableManager(_db, _db.syncQueue);
 }

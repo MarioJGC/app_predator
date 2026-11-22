@@ -150,5 +150,36 @@
         "type": "String"
       }
     }
+  },
+  "liveHunt": "Jornada en grupo",
+  "myCaptures": "Mis capturas",
+  "newCapture": "Registrar captura",
+  "capturesEmpty": "Todavía no has registrado capturas.",
+  "captureSpecies": "¿Qué especie?",
+  "captureCount": "Cantidad",
+  "less": "Menos",
+  "more": "Más",
+  "takePhoto": "Hacer foto (opcional)",
+  "retakePhoto": "Repetir foto",
+  "removePhoto": "Quitar foto",
+  "captureNotes": "Notas (opcional)",
+  "gettingLocation": "Buscando tu ubicación…",
+  "locationSaved": "Se guardará el lugar donde estás ahora.",
+  "locationNotAvailable": "Sin ubicación: no se pudo usar el GPS.",
+  "captureSaved": "Captura guardada",
+  "captureTitle": "{species} × {count}",
+  "deleteCapture": "Borrar captura",
+  "deleteCaptureQuestion": "¿Borrar esta captura?",
+  "captureNotFound": "Esta captura ya no existe.",
+  "photoError": "No se pudo guardar la foto.",
+  "@captureTitle": {
+    "placeholders": {
+      "species": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
   }
 }

@@ -51,6 +51,31 @@ class ZonePoints extends Table {
   Set<Column> get primaryKey => {id};
 }
 
+/// Game taken by the user (PRD RF-60).
+@DataClassName('CaptureRow')
+class Captures extends Table {
+  TextColumn get id => text()();
+
+  /// Species key, e.g. 'wild_boar'.
+  TextColumn get species => text()();
+  IntColumn get count => integer().withDefault(const Constant(1))();
+
+  /// Local file path of the compressed photo (no EXIF).
+  TextColumn get photoPath => text().nullable()();
+  RealColumn get latitude => real().nullable()();
+  RealColumn get longitude => real().nullable()();
+  TextColumn get notes => text().nullable()();
+  DateTimeColumn get takenAt => dateTime()();
+
+  /// Live hunt it belongs to. Filled when hunts exist (backend).
+  TextColumn get huntId => text().nullable()();
+  DateTimeColumn get updatedAt => dateTime()();
+  DateTimeColumn get deletedAt => dateTime().nullable()();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
 /// Outbox: local changes waiting to be uploaded when there is network.
 /// Filled now; read by the sync engine when the backend exists.
 @DataClassName('SyncQueueRow')
@@ -66,12 +91,21 @@ class SyncQueue extends Table {
   DateTimeColumn get createdAt => dateTime()();
 }
 
-@DriftDatabase(tables: [Zones, ZonePoints, SyncQueue])
+@DriftDatabase(tables: [Zones, ZonePoints, Captures, SyncQueue])
 class AppDatabase extends _$AppDatabase {
   /// [executor] is only passed in tests (in-memory database).
   AppDatabase([QueryExecutor? executor])
       : super(executor ?? driftDatabase(name: 'app_cazador'));
 
+  /// v1: zones, points, sync queue. v2: captures.
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
+
+  @override
+  MigrationStrategy get migration => MigrationStrategy(
+        onCreate: (m) => m.createAll(),
+        onUpgrade: (m, from, to) async {
+          if (from < 2) await m.createTable(captures);
+        },
+      );
 }

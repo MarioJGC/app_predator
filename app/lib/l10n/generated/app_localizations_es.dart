@@ -318,4 +318,69 @@ class AppLocalizationsEs extends AppLocalizations {
   String offlineMapsTotal(String size) {
     return 'Espacio usado: $size';
   }
+
+  @override
+  String get liveHunt => 'Jornada en grupo';
+
+  @override
+  String get myCaptures => 'Mis capturas';
+
+  @override
+  String get newCapture => 'Registrar captura';
+
+  @override
+  String get capturesEmpty => 'Todavía no has registrado capturas.';
+
+  @override
+  String get captureSpecies => '¿Qué especie?';
+
+  @override
+  String get captureCount => 'Cantidad';
+
+  @override
+  String get less => 'Menos';
+
+  @override
+  String get more => 'Más';
+
+  @override
+  String get takePhoto => 'Hacer foto (opcional)';
+
+  @override
+  String get retakePhoto => 'Repetir foto';
+
+  @override
+  String get removePhoto => 'Quitar foto';
+
+  @override
+  String get captureNotes => 'Notas (opcional)';
+
+  @override
+  String get gettingLocation => 'Buscando tu ubicación…';
+
+  @override
+  String get locationSaved => 'Se guardará el lugar donde estás ahora.';
+
+  @override
+  String get locationNotAvailable => 'Sin ubicación: no se pudo usar el GPS.';
+
+  @override
+  String get captureSaved => 'Captura guardada';
+
+  @override
+  String captureTitle(String species, int count) {
+    return '$species × $count';
+  }
+
+  @override
+  String get deleteCapture => 'Borrar captura';
+
+  @override
+  String get deleteCaptureQuestion => '¿Borrar esta captura?';
+
+  @override
+  String get captureNotFound => 'Esta captura ya no existe.';
+
+  @override
+  String get photoError => 'No se pudo guardar la foto.';
 }
