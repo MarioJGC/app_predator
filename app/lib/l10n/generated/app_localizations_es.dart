@@ -93,7 +93,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get drawAreaInstructions =>
-      'Toca el mapa para marcar las esquinas de la zona.';
+      'Toca el mapa para marcar las esquinas, siguiendo el borde de la zona en orden. Puedes poner todas las que necesites.';
 
   @override
   String get undo => 'Deshacer';
@@ -414,4 +414,33 @@ class AppLocalizationsEs extends AppLocalizations {
   String mapFailedNotice(String name) {
     return 'No se pudo descargar el mapa de «$name».';
   }
+
+  @override
+  String get crossingNotAllowed =>
+      'Ese punto haría que las líneas se crucen. Toca en otro sitio, siguiendo el borde en orden.';
+
+  @override
+  String get routeSaveQuestion => '¿Cómo quieres guardar el recorrido?';
+
+  @override
+  String get saveAsRoute => 'Guardar como ruta';
+
+  @override
+  String get saveAsRouteHint => 'Un camino, sin cerrar.';
+
+  @override
+  String get closeAsArea => 'Cerrar como área';
+
+  @override
+  String get closeAsAreaHint =>
+      'La app une el final con el principio y crea una zona.';
+
+  @override
+  String convertToAreaQuestion(String name) {
+    return '¿Cerrar la ruta «$name» y convertirla en un área?';
+  }
+
+  @override
+  String get convertToAreaMessage =>
+      'Se unirá el final del camino con el principio.';
 }

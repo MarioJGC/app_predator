@@ -26,7 +26,7 @@
   "drawAreaHint": "To mark an estate or hunting ground on the map.",
   "recordRoute": "Record a route",
   "recordRouteHint": "Walk and the app saves the path with GPS.",
-  "drawAreaInstructions": "Tap the map to mark the corners of the area.",
+  "drawAreaInstructions": "Tap the map to mark the corners, following the edge of the area in order. Add as many as you need.",
   "undo": "Undo",
   "next": "Next",
   "startRecording": "Start recording",
@@ -124,5 +124,13 @@
   "labelNotes": "Notes",
   "view": "View",
   "mapReadyNotice": "Map of \"{name}\" downloaded. You can now see it without signal.",
-  "mapFailedNotice": "Couldn't download the map of \"{name}\"."
+  "mapFailedNotice": "Couldn't download the map of \"{name}\".",
+  "crossingNotAllowed": "That point would make the lines cross. Tap somewhere else, following the edge in order.",
+  "routeSaveQuestion": "How do you want to save the track?",
+  "saveAsRoute": "Save as route",
+  "saveAsRouteHint": "A path, not closed.",
+  "closeAsArea": "Close as area",
+  "closeAsAreaHint": "The app joins the end with the start and creates an area.",
+  "convertToAreaQuestion": "Close the route \"{name}\" and turn it into an area?",
+  "convertToAreaMessage": "The end of the path will be joined to the start."
 }

@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:maplibre_gl/maplibre_gl.dart';
 import 'package:material_ui/material_ui.dart';
 
+import '../../../core/geo/geo_utils.dart';
 import '../../../core/location/location_service.dart';
 import '../../../core/map/map_layers.dart';
 import '../../../core/widgets/instruction_banner.dart';
@@ -28,6 +29,15 @@ class _DrawAreaScreenState extends ConsumerState<DrawAreaScreen> {
   final List<LatLng> _corners = [];
 
   void _addCorner(Point<double> _, LatLng position) {
+    // No limit of corners, but sides must not cross (no "bow ties").
+    if (GeoUtils.wouldCross(_corners, position)) {
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(SnackBar(
+          content: Text(AppLocalizations.of(context).crossingNotAllowed),
+        ));
+      return;
+    }
     setState(() => _corners.add(position));
     _redraw();
   }

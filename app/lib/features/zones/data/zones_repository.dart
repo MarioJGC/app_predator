@@ -91,6 +91,20 @@ class ZonesRepository {
     });
   }
 
+  /// Turns a recorded route into an area: the polygon closes itself
+  /// (last point joined to the first).
+  Future<void> convertRouteToArea(String id) {
+    return _db.transaction(() async {
+      await (_db.update(_db.zones)..where((z) => z.id.equals(id))).write(
+        ZonesCompanion(
+          kind: Value(ZoneKind.area.name),
+          updatedAt: Value(DateTime.now()),
+        ),
+      );
+      await _enqueue('zones', id, 'upsert');
+    });
+  }
+
   /// Soft-deletes the zone and all its points.
   Future<void> deleteZone(String id) {
     final now = DateTime.now();

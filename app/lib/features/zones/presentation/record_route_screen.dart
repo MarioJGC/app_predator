@@ -71,12 +71,22 @@ class _RecordRouteScreenState extends ConsumerState<RecordRouteScreen> {
     await drawDraft(controller, _track, closed: false);
   }
 
-  void _next() {
-    Navigator.of(context).pushReplacement(MaterialPageRoute<void>(
-      builder: (_) => ZoneFormScreen.create(
-        kind: ZoneKind.route,
-        geometry: List.of(_track),
-      ),
+  /// Asks "route or area?": a track that doesn't end where it started can
+  /// still become an area, joining the end with the start.
+  Future<void> _next() async {
+    final navigator = Navigator.of(context);
+    var kind = ZoneKind.route;
+    if (_track.length >= 3) {
+      final chosen = await showModalBottomSheet<ZoneKind>(
+        context: context,
+        showDragHandle: true,
+        builder: (context) => _RouteOrAreaSheet(),
+      );
+      if (chosen == null) return;
+      kind = chosen;
+    }
+    navigator.pushReplacement(MaterialPageRoute<void>(
+      builder: (_) => ZoneFormScreen.create(kind: kind, geometry: List.of(_track)),
     ));
   }
 
@@ -145,6 +155,44 @@ class _RecordRouteScreenState extends ConsumerState<RecordRouteScreen> {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _RouteOrAreaSheet extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(l10n.routeSaveQuestion, style: Theme.of(context).textTheme.titleLarge),
+            const SizedBox(height: 16),
+            LargeButton(
+              icon: Icons.timeline,
+              label: l10n.saveAsRoute,
+              onPressed: () => Navigator.of(context).pop(ZoneKind.route),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 4, bottom: 16),
+              child: Text(l10n.saveAsRouteHint, textAlign: TextAlign.center),
+            ),
+            LargeButton(
+              icon: Icons.crop_square,
+              label: l10n.closeAsArea,
+              primary: false,
+              onPressed: () => Navigator.of(context).pop(ZoneKind.area),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 4),
+              child: Text(l10n.closeAsAreaHint, textAlign: TextAlign.center),
+            ),
+          ],
+        ),
       ),
     );
   }

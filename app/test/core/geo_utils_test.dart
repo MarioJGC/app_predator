@@ -34,6 +34,33 @@ void main() {
     expect(b.northeast, ne);
   });
 
+  group('wouldCross', () {
+    test('corners in order around the area do not cross', () {
+      expect(GeoUtils.wouldCross([sw, se, ne], nw), isFalse);
+    });
+
+    test('a corner that makes a bow tie is detected', () {
+      // sw → se → nw, then ne: side nw→ne is fine but closing ne→sw
+      // crosses se→nw.
+      expect(GeoUtils.wouldCross([sw, se, nw], ne), isTrue);
+    });
+
+    test('many corners: a point inside that folds the shape is detected', () {
+      const mid = LatLng(39.5545, -4.3442); // Centre of the square.
+      const outsideEast = LatLng(39.5545, -4.3300);
+      // A pentagon going around, then a point that jumps back across it.
+      final corners = [sw, se, outsideEast, ne, nw];
+      expect(GeoUtils.isSimplePolygon(corners), isTrue);
+      expect(GeoUtils.wouldCross(corners, mid), isFalse);
+      expect(GeoUtils.wouldCross(corners, const LatLng(39.5545, -4.3200)), isTrue);
+    });
+
+    test('isSimplePolygon spots the zig-zag from the phone test', () {
+      expect(GeoUtils.isSimplePolygon([sw, ne, se, nw]), isFalse);
+      expect(GeoUtils.isSimplePolygon(square), isTrue);
+    });
+  });
+
   test('expand adds the margin on every side', () {
     final b = GeoUtils.expand(GeoUtils.bounds(square), 1000);
     expect(GeoUtils.distanceMeters(b.southwest, LatLng(sw.latitude, b.southwest.longitude)),

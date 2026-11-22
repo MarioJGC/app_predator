@@ -59,6 +59,19 @@ void main() {
     expect(await repo.watchPoints().first, isEmpty);
   });
 
+  test('a route can be closed into an area', () async {
+    final id = await repo.createZone(
+      name: 'Ruta',
+      kind: ZoneKind.route,
+      geometry: triangle,
+    );
+    await repo.convertRouteToArea(id);
+
+    final zone = await repo.watchZone(id).first;
+    expect(zone!.kind, ZoneKind.area);
+    expect(zone.size, greaterThan(0)); // Now measured as an area (m²).
+  });
+
   test('every change is added to the sync queue', () async {
     final id = await repo.createZone(
       name: 'Zona',

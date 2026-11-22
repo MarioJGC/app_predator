@@ -26,7 +26,7 @@
   "drawAreaHint": "Para marcar una finca o un coto en el mapa.",
   "recordRoute": "Grabar una ruta",
   "recordRouteHint": "Camina y la app guarda el camino con el GPS.",
-  "drawAreaInstructions": "Toca el mapa para marcar las esquinas de la zona.",
+  "drawAreaInstructions": "Toca el mapa para marcar las esquinas, siguiendo el borde de la zona en orden. Puedes poner todas las que necesites.",
   "undo": "Deshacer",
   "next": "Siguiente",
   "startRecording": "Empezar a grabar",
@@ -199,6 +199,21 @@
     }
   },
   "@mapFailedNotice": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "crossingNotAllowed": "Ese punto haría que las líneas se crucen. Toca en otro sitio, siguiendo el borde en orden.",
+  "routeSaveQuestion": "¿Cómo quieres guardar el recorrido?",
+  "saveAsRoute": "Guardar como ruta",
+  "saveAsRouteHint": "Un camino, sin cerrar.",
+  "closeAsArea": "Cerrar como área",
+  "closeAsAreaHint": "La app une el final con el principio y crea una zona.",
+  "convertToAreaQuestion": "¿Cerrar la ruta «{name}» y convertirla en un área?",
+  "convertToAreaMessage": "Se unirá el final del camino con el principio.",
+  "@convertToAreaQuestion": {
     "placeholders": {
       "name": {
         "type": "String"
