@@ -383,4 +383,35 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get photoError => 'No se pudo guardar la foto.';
+
+  @override
+  String get labelType => 'Tipo';
+
+  @override
+  String get labelSize => 'Tamaño';
+
+  @override
+  String get labelDescription => 'Descripción';
+
+  @override
+  String get labelDate => 'Fecha';
+
+  @override
+  String get labelLocation => 'Ubicación';
+
+  @override
+  String get labelNotes => 'Notas';
+
+  @override
+  String get view => 'Ver';
+
+  @override
+  String mapReadyNotice(String name) {
+    return 'Mapa de «$name» descargado. Ya puedes verlo sin cobertura.';
+  }
+
+  @override
+  String mapFailedNotice(String name) {
+    return 'No se pudo descargar el mapa de «$name».';
+  }
 }

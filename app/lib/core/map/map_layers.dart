@@ -5,8 +5,9 @@ enum MapLayer {
   /// PNOA orthophoto (satellite imagery).
   orthophoto('assets/map/pnoa_style.json'),
 
-  /// MTN topographic map.
-  topographic('assets/map/mtn_style.json');
+  /// IGN Base: modern map with relief shading, roads and place names.
+  /// Sharper than the scanned MTN (feedback from the first phone test).
+  topographic('assets/map/ign_base_style.json');
 
   const MapLayer(this.styleAsset);
 

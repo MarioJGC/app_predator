@@ -11,20 +11,32 @@ abstract final class AppTheme {
 
   static const Color _seed = Color(0xFF4E6B2F); // Olive green.
 
+  /// Designed for readers with low vision (bundled in assets/fonts).
+  static const String fontFamily = 'AtkinsonHyperlegible';
+
   static ThemeData light() {
     final scheme = ColorScheme.fromSeed(seedColor: _seed);
-    final base = ThemeData(colorScheme: scheme, useMaterial3: true);
+    final base = ThemeData(
+      colorScheme: scheme,
+      useMaterial3: true,
+      fontFamily: fontFamily,
+    );
     final text = base.textTheme;
 
-    const buttonText = TextStyle(fontSize: 18, fontWeight: FontWeight.w600);
+    // fontFamily must be repeated: button styles don't inherit it.
+    const buttonText = TextStyle(
+      fontFamily: fontFamily,
+      fontSize: 18,
+      fontWeight: FontWeight.w700,
+    );
     const buttonSize = Size(64, minTouchSize);
     const buttonPadding = EdgeInsets.symmetric(horizontal: 24, vertical: 12);
 
     return base.copyWith(
       textTheme: text.copyWith(
-        headlineSmall: text.headlineSmall?.copyWith(fontSize: 26),
-        titleLarge: text.titleLarge?.copyWith(fontSize: 24),
-        titleMedium: text.titleMedium?.copyWith(fontSize: 20),
+        headlineSmall: text.headlineSmall?.copyWith(fontSize: 26, fontWeight: FontWeight.w700),
+        titleLarge: text.titleLarge?.copyWith(fontSize: 24, fontWeight: FontWeight.w700),
+        titleMedium: text.titleMedium?.copyWith(fontSize: 20, fontWeight: FontWeight.w700),
         bodyLarge: text.bodyLarge?.copyWith(fontSize: 18),
         bodyMedium: text.bodyMedium?.copyWith(fontSize: 18),
         labelLarge: text.labelLarge?.copyWith(fontSize: 18),
@@ -59,6 +71,7 @@ abstract final class AppTheme {
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         sizeConstraints: BoxConstraints.tightFor(width: 64, height: 64),
         iconSize: 30,
+        extendedTextStyle: buttonText,
       ),
       navigationBarTheme: NavigationBarThemeData(
         height: 80,

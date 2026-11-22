@@ -103,7 +103,8 @@ class _ZoneFormScreenState extends ConsumerState<ZoneFormScreen> {
       body: Form(
         key: _formKey,
         child: ListView(
-          padding: const EdgeInsets.all(16),
+          // Extra bottom space: Android's navigation bar covers the screen edge.
+          padding: EdgeInsets.fromLTRB(16, 16, 16, 16 + MediaQuery.viewPaddingOf(context).bottom),
           children: [
             TextFormField(
               controller: _name,

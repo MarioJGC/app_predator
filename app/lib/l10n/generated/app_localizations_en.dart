@@ -382,4 +382,35 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get photoError => 'Couldn\'t save the photo.';
+
+  @override
+  String get labelType => 'Type';
+
+  @override
+  String get labelSize => 'Size';
+
+  @override
+  String get labelDescription => 'Description';
+
+  @override
+  String get labelDate => 'Date';
+
+  @override
+  String get labelLocation => 'Location';
+
+  @override
+  String get labelNotes => 'Notes';
+
+  @override
+  String get view => 'View';
+
+  @override
+  String mapReadyNotice(String name) {
+    return 'Map of \"$name\" downloaded. You can now see it without signal.';
+  }
+
+  @override
+  String mapFailedNotice(String name) {
+    return 'Couldn\'t download the map of \"$name\".';
+  }
 }

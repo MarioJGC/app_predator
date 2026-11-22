@@ -181,5 +181,28 @@
         "type": "int"
       }
     }
+  },
+  "labelType": "Tipo",
+  "labelSize": "Tamaño",
+  "labelDescription": "Descripción",
+  "labelDate": "Fecha",
+  "labelLocation": "Ubicación",
+  "labelNotes": "Notas",
+  "view": "Ver",
+  "mapReadyNotice": "Mapa de «{name}» descargado. Ya puedes verlo sin cobertura.",
+  "mapFailedNotice": "No se pudo descargar el mapa de «{name}».",
+  "@mapReadyNotice": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "@mapFailedNotice": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
   }
 }
