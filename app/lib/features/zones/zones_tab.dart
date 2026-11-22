@@ -9,6 +9,7 @@ import '../../l10n/generated/app_localizations.dart';
 import 'data/zones_repository.dart';
 import 'domain/zone.dart';
 import 'presentation/draw_area_screen.dart';
+import 'presentation/offline_maps_screen.dart';
 import 'presentation/record_route_screen.dart';
 import 'presentation/zone_detail_screen.dart';
 import 'presentation/zone_labels.dart';
@@ -23,7 +24,18 @@ class ZonesTab extends ConsumerWidget {
     final zones = ref.watch(zonesProvider).value ?? const <Zone>[];
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.tabZones)),
+      appBar: AppBar(
+        title: Text(l10n.tabZones),
+        actions: [
+          TextButton.icon(
+            icon: const Icon(Icons.download_for_offline),
+            label: Text(l10n.offlineMaps),
+            onPressed: () => Navigator.of(context).push(MaterialPageRoute<void>(
+              builder: (_) => const OfflineMapsScreen(),
+            )),
+          ),
+        ],
+      ),
       body: zones.isEmpty
           ? InfoView(
               icon: Icons.terrain,

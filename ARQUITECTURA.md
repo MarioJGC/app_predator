@@ -127,6 +127,7 @@ app-cazador/
    - Las teselas vienen de nuestra caché en Cloudflare R2 y no directamente del IGN, para no saturar sus servidores. Hay que **verificar sus condiciones de uso masivo** antes del lanzamiento.
    - **Validado en la prueba técnica** (`spike/mapas-offline`, 22/11/2026): con `maplibre_gl` 0.28 se descarga una región PNOA (zoom 12–16) y se ve en modo avión.
    - **Lección aprendida:** el gestor offline de MapLibre **solo descarga estilos servidos por http(s)**; no acepta `asset://` ni `file://`. Por eso el mapa carga el estilo desde los *assets* de la app (funciona sin red) y la descarga usa la **misma** hoja de estilo publicada en una URL. Como las URLs de las teselas coinciden, las teselas descargadas se reutilizan. En producción, el estilo se publicará junto a la caché de teselas (Cloudflare).
+   - **Implementado** (`feature/mapas-offline`): cada zona descarga **ortofoto + topográfico** (zoom 12–16, más 1 km de margen) con el estilo `app/assets/map/offline_style.json`. Mientras no exista la caché propia, ese estilo se lee del repositorio público de GitHub (rama `main`). Para pruebas locales se puede cambiar con `--dart-define=STYLE_URL=...`. Medida real: zona de 21 ha → 4,2 MB.
 ## 6. Jornada en vivo
  
 ```mermaid

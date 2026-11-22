@@ -53,6 +53,13 @@ extension ZoneLabels on AppLocalizations {
         : formatDistance(zone.size);
   }
 
+  /// "850 KB", "12,3 MB".
+  String formatBytes(int bytes) {
+    const mb = 1024 * 1024;
+    if (bytes < mb) return '${(bytes / 1024).ceil()} KB';
+    return '${NumberFormat('#,##0.0', localeName).format(bytes / mb)} MB';
+  }
+
   String formatDistance(double meters) {
     if (meters < 1000) return '${meters.round()} m';
     return '${NumberFormat('#,##0.0', localeName).format(meters / 1000)} km';

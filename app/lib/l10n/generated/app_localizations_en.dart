@@ -270,4 +270,51 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get zoneNotFound => 'This area no longer exists.';
+
+  @override
+  String downloadMap(String size) {
+    return 'Download map ($size)';
+  }
+
+  @override
+  String get downloadMapHint => 'To see it without signal in the field.';
+
+  @override
+  String downloadingMap(int percent) {
+    return 'Downloading map… $percent%';
+  }
+
+  @override
+  String mapDownloaded(String size) {
+    return 'Map downloaded ($size)';
+  }
+
+  @override
+  String get mapDownloadFailed =>
+      'Couldn\'t download the map. Check your connection.';
+
+  @override
+  String get retry => 'Try again';
+
+  @override
+  String get deleteMap => 'Delete downloaded map';
+
+  @override
+  String deleteMapQuestion(String name) {
+    return 'Delete the downloaded map of \"$name\"?';
+  }
+
+  @override
+  String get offlineMaps => 'Downloaded maps';
+
+  @override
+  String get offlineMapsEmpty => 'You don\'t have any downloaded maps.';
+
+  @override
+  String get offlineMapsHint => 'Download the map from each area\'s page.';
+
+  @override
+  String offlineMapsTotal(String size) {
+    return 'Space used: $size';
+  }
 }
