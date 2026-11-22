@@ -156,6 +156,8 @@ sequenceDiagram
 - **Respaldo:** una Edge Function guarda una posición por minuto en `posicion_en_vivo`, para el SOS y la última ubicación conocida. pg_cron la borra a los 7 días.
 - **Cierre automático:** si nadie termina la jornada, se cierra sola a las 12 h.
 ## 7. Modelo de datos (Postgres + PostGIS)
+
+> **Implementado** en `supabase/migrations/20261122170000_initial_schema.sql` con nombres en inglés (`profiles`, `zones`, `zone_points`, `captures`), igual que el código. El SQL de esta sección es el diseño original; la migración es la fuente de verdad. Diferencias: la geometría se guarda como `geometry jsonb` (la misma lista de coordenadas que usa el móvil) y un trigger rellena `geom` (PostGIS); `updated_at` lo pone siempre el servidor.
  
 ```sql
 -- Extensiones
@@ -305,7 +307,7 @@ Las tablas `punto`, `captura`, `jornada`, etc. siguen el mismo patrón. **Todos 
  
 | Entorno | Supabase | App |
 |---|---|---|
-| **dev** | Supabase local (`supabase start`, Docker) | Emulador / móvil propio |
+| **dev** | Proyecto Supabase gratis en la nube (`ghppjaljkzwcnhdbezjm`, región `eu-central-2`). No se usa Supabase local porque el equipo no tiene Docker | Emulador / móvil propio |
 | **staging** | Proyecto Supabase gratis | Google Play «prueba interna» |
 | **prod** | Proyecto Supabase Pro (UE) | Google Play producción → App Store (fase 3) |
  
@@ -318,7 +320,7 @@ Las tablas `punto`, `captura`, `jornada`, etc. siguen el mismo patrón. **Todos 
 - Mapas: script que precalienta la caché de teselas IGN de las zonas piloto en R2.
 ## 11. Seguridad y RGPD
  
-- **Alojamiento en la UE**: Supabase en Frankfurt, PostHog EU, Cloudflare.
+- **Alojamiento en Europa**: Supabase en Zúrich (`eu-central-2`; Suiza tiene decisión de adecuación de la UE, así que cumple el RGPD), PostHog EU, Cloudflare. El plan gratuito no deja elegir ciudad, solo continente.
 - **Consentimiento explícito** para la ubicación en segundo plano. Mientras se comparte, se ve un aviso permanente («Compartiendo ubicación con Montería X»).
 - **Minimización**:
   - las posiciones se borran a los 7 días,
