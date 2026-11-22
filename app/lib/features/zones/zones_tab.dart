@@ -21,7 +21,10 @@ class ZonesTab extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final zones = ref.watch(zonesProvider).value ?? const <Zone>[];
+    // Only top-level zones here; subzones are inside each zone's page.
+    final zones = ref.watch(childZonesProvider(null)).value ?? const <Zone>[];
+    final all = ref.watch(zonesProvider).value ?? const <Zone>[];
+    int subzoneCount(String id) => all.where((z) => z.parentId == id).length;
 
     return Scaffold(
       appBar: AppBar(
@@ -57,9 +60,11 @@ class ZonesTab extends ConsumerWidget {
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   leading: Icon(zoneKindIcon(zone.kind), size: 36),
                   title: Text(zone.name),
-                  subtitle: Text(
-                    '${l10n.zoneKind(zone.kind)} · ${l10n.zoneSize(zone)}',
-                  ),
+                  subtitle: Text([
+                    l10n.zoneKind(zone.kind),
+                    l10n.zoneSize(zone),
+                    if (subzoneCount(zone.id) > 0) l10n.subzonesCount(subzoneCount(zone.id)),
+                  ].join(' · ')),
                   trailing: const Icon(Icons.chevron_right, size: 32),
                   onTap: () => openZone(context, zone.id),
                 );

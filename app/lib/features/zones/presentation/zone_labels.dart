@@ -3,6 +3,7 @@ import 'package:material_ui/material_ui.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
 import '../domain/zone.dart';
+import '../domain/zone_features.dart';
 
 /// Translated names, icons and colors for zone data.
 extension ZoneLabels on AppLocalizations {
@@ -42,6 +43,42 @@ extension ZoneLabels on AppLocalizations {
         'waiting' => modalityWaiting,
         'small_game' => modalitySmallGame,
         'other' => modalityOther,
+        _ => key,
+      };
+
+  String dangerLevelName(DangerLevel level) => switch (level) {
+        DangerLevel.none => dangerNone,
+        DangerLevel.low => dangerLow,
+        DangerLevel.medium => dangerMedium,
+        DangerLevel.high => dangerHigh,
+      };
+
+  String foodWaterName(String key) => switch (key) {
+        'feeder' => foodFeeder,
+        'water_trough' => foodWaterTrough,
+        'natural_water' => foodNaturalWater,
+        'crops' => foodCrops,
+        'acorns' => foodAcorns,
+        'fruit' => foodFruit,
+        _ => key,
+      };
+
+  String dangerTypeName(String key) => switch (key) {
+        'cliff' => dangerCliff,
+        'road' => dangerRoad,
+        'houses' => dangerHouses,
+        'no_hunting' => dangerNoHunting,
+        'livestock' => dangerLivestock,
+        'other' => dangerOther,
+        _ => key,
+      };
+
+  String wildlifeSignName(String key) => switch (key) {
+        'bedding' => signBedding,
+        'crossing' => signCrossing,
+        'wallow' => signWallow,
+        'rub' => signRub,
+        'tracks' => signTracks,
         _ => key,
       };
 
@@ -85,6 +122,22 @@ abstract final class ZoneColors {
   static const outline = '#FF6F00';
   static const draft = '#00E5FF';
 
+  /// Subzones: blue, so they stand out from their (orange) parent zone.
+  static const subzone = '#1E88E5';
+
+  /// Fill of a zone by danger level; null keeps the normal color.
+  static String? danger(DangerLevel level) => switch (level) {
+        DangerLevel.none => null,
+        DangerLevel.low => '#FDD835',
+        DangerLevel.medium => '#FB8C00',
+        DangerLevel.high => '#E53935',
+      };
+
+  static Color dangerColor(DangerLevel level) =>
+      _hex(danger(level) ?? '#9E9E9E');
+
+  static Color _hex(String hex) => Color(int.parse('FF${hex.substring(1)}', radix: 16));
+
   static String point(PointKind kind) => switch (kind) {
         PointKind.stand => '#D32F2F',
         PointKind.parking => '#1565C0',
@@ -93,6 +146,5 @@ abstract final class ZoneColors {
         PointKind.other => '#6A1B9A',
       };
 
-  static Color pointColor(PointKind kind) =>
-      Color(int.parse('FF${point(kind).substring(1)}', radix: 16));
+  static Color pointColor(PointKind kind) => _hex(point(kind));
 }

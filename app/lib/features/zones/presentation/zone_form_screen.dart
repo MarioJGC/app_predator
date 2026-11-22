@@ -17,14 +17,19 @@ class ZoneFormScreen extends ConsumerStatefulWidget {
     super.key,
     required ZoneKind this.kind,
     required List<LatLng> this.geometry,
+    this.parentId,
   }) : existing = null;
 
   /// Existing zone: saves the changes and goes back.
   const ZoneFormScreen.edit({super.key, required Zone this.existing})
       : kind = null,
-        geometry = null;
+        geometry = null,
+        parentId = null;
 
   final ZoneKind? kind;
+
+  /// Set when creating a subzone.
+  final String? parentId;
   final List<LatLng>? geometry;
   final Zone? existing;
 
@@ -39,6 +44,8 @@ class _ZoneFormScreenState extends ConsumerState<ZoneFormScreen> {
   late final Set<String> _species;
   String? _modality;
   bool _saving = false;
+
+  bool get _isSubzone => widget.parentId != null || (widget.existing?.isSubzone ?? false);
 
   @override
   void initState() {
@@ -85,6 +92,7 @@ class _ZoneFormScreenState extends ConsumerState<ZoneFormScreen> {
         description: _description.text,
         species: species,
         modality: _modality,
+        parentId: widget.parentId,
       );
       navigator.pushReplacement(MaterialPageRoute<void>(
         builder: (_) => ZoneDetailScreen(zoneId: id),
@@ -116,6 +124,8 @@ class _ZoneFormScreenState extends ConsumerState<ZoneFormScreen> {
               validator: (value) =>
                   (value == null || value.trim().isEmpty) ? l10n.zoneNameRequired : null,
             ),
+            // Subzones note animals in "What's here", not here.
+            if (!_isSubzone) ...[
             const SizedBox(height: 24),
             Text(l10n.species, style: textTheme.titleMedium),
             const SizedBox(height: 8),
@@ -149,6 +159,7 @@ class _ZoneFormScreenState extends ConsumerState<ZoneFormScreen> {
                   ),
               ],
             ),
+            ],
             const SizedBox(height: 24),
             TextFormField(
               controller: _description,

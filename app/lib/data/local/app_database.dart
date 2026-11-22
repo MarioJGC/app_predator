@@ -23,6 +23,14 @@ class Zones extends Table {
   /// Comma-separated species keys, e.g. "wild_boar,red_deer".
   TextColumn get species => text().withDefault(const Constant(''))();
   TextColumn get modality => text().nullable()();
+
+  /// Zone that contains this one (subzone). Null for top-level zones.
+  /// Any depth is allowed: zone → subzone → sub-subzone...
+  TextColumn get parentId => text().nullable().references(Zones, #id)();
+
+  /// JSON with what is in the zone: animals, food & water, danger,
+  /// bedding & paths. See `ZoneFeatures`.
+  TextColumn get features => text().withDefault(const Constant('{}'))();
   DateTimeColumn get createdAt => dateTime()();
   DateTimeColumn get updatedAt => dateTime()();
 
@@ -97,15 +105,19 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? executor])
       : super(executor ?? driftDatabase(name: 'app_cazador'));
 
-  /// v1: zones, points, sync queue. v2: captures.
+  /// v1: zones, points, sync queue. v2: captures. v3: subzones + features.
   @override
-  int get schemaVersion => 2;
+  int get schemaVersion => 3;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
         onCreate: (m) => m.createAll(),
         onUpgrade: (m, from, to) async {
           if (from < 2) await m.createTable(captures);
+          if (from < 3) {
+            await m.addColumn(zones, zones.parentId);
+            await m.addColumn(zones, zones.features);
+          }
         },
       );
 }

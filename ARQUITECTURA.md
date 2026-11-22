@@ -65,7 +65,7 @@ flowchart LR
 | Gestión de estado | **Riverpod** | Bloc | Menos código repetitivo y fácil de probar |
 | Base de datos local | **Drift (SQLite)** | Isar, Hive | Es SQL de verdad. Permite consultas por zona y la cola de sincronización |
 | Mapas | **MapLibre GL** (`maplibre_gl`) | Google Maps SDK, Mapbox | Gratis y de código abierto. **Descarga regiones para usarlas sin conexión** (Google Maps no lo permite) |
-| Cartografía | **IGN: PNOA (ortofoto) + MTN (topográfico)**, servidas a través de una caché propia en Cloudflare R2 | Mapbox Satellite | Calidad excelente en España, gratis con atribución. El cazador las reconoce |
+| Cartografía | **IGN: PNOA (ortofoto) + IGN Base (mapa con relieve; sustituye al MTN escaneado desde el 22/11/2026)**, servidas a través de una caché propia en Cloudflare R2 | Mapbox Satellite | Calidad excelente en España, gratis con atribución. El cazador las reconoce |
 | Navegación en coche | **Enlace directo a Google Maps / Waze** | Rutas dentro de la app | 0 € y el usuario ya conoce esas apps |
 | GPS | `geolocator` + servicio en primer plano de Android | `flutter_background_geolocation` (licencia de pago) | Gratis y suficiente para el MVP. Se puede cambiar si hay problemas de batería |
 | Backend | **Supabase** (Postgres 15 + PostGIS) | Firebase | Las consultas geográficas son nativas (PostGIS). Los permisos se definen en SQL (RLS). Hay región UE. No te ata a un proveedor (es Postgres estándar) |
@@ -192,6 +192,8 @@ create table zona (
   geom geometry(Geometry, 4326) not null, -- Polygon o LineString
   especies text[],
   modalidad text,
+  padre_id uuid references zona,           -- subzona: zona que la contiene (niveles ilimitados)
+  caracteristicas jsonb default '{}',      -- animales, comida_agua, peligro, encame_pasos
   foto_url text,
   updated_at timestamptz default now(),
   deleted_at timestamptz

@@ -7,8 +7,11 @@ import 'zone_labels.dart';
 /// Key used in annotation data to find the zone that was tapped.
 const zoneIdKey = 'zoneId';
 
-/// Draws zones and points on a map. Call it again whenever the data or the
-/// map style changes (a new style removes every annotation).
+/// Draws zones, subzones and points on a map. Call it again whenever the data
+/// or the map style changes (a new style removes every annotation).
+///
+/// Parents are drawn first so subzones stay on top (and get the tap).
+/// Subzones are blue; zones with danger are filled yellow/orange/red.
 Future<void> drawZones(
   MapLibreMapController controller, {
   required List<Zone> zones,
@@ -18,23 +21,41 @@ Future<void> drawZones(
   await controller.clearLines();
   await controller.clearCircles();
 
-  for (final zone in zones) {
+  final byId = {for (final z in zones) z.id: z};
+  int depth(Zone zone) {
+    var d = 0;
+    var parent = zone.parentId;
+    while (parent != null && byId.containsKey(parent) && d < 50) {
+      d++;
+      parent = byId[parent]!.parentId;
+    }
+    return d;
+  }
+
+  final sorted = [...zones]..sort((a, b) => depth(a).compareTo(depth(b)));
+  for (final zone in sorted) {
     final data = {zoneIdKey: zone.id};
+    final outline = zone.isSubzone ? ZoneColors.subzone : ZoneColors.outline;
+    final danger = ZoneColors.danger(zone.features.dangerLevel);
     if (zone.kind == ZoneKind.area && zone.geometry.length >= 3) {
       final ring = GeoUtils.closedRing(zone.geometry);
       await controller.addFill(
-        FillOptions(geometry: [ring], fillColor: ZoneColors.area, fillOpacity: 0.25),
+        FillOptions(
+          geometry: [ring],
+          fillColor: danger ?? (zone.isSubzone ? ZoneColors.subzone : ZoneColors.area),
+          fillOpacity: danger != null ? 0.35 : 0.2,
+        ),
         data,
       );
       await controller.addLine(
-        LineOptions(geometry: ring, lineColor: ZoneColors.outline, lineWidth: 3),
+        LineOptions(geometry: ring, lineColor: outline, lineWidth: 3),
         data,
       );
     } else if (zone.geometry.length >= 2) {
       await controller.addLine(
         LineOptions(
           geometry: zone.geometry,
-          lineColor: ZoneColors.outline,
+          lineColor: outline,
           lineWidth: 5,
           lineJoin: 'round',
         ),
@@ -58,14 +79,24 @@ Future<void> drawZones(
 }
 
 /// Draws the shape being created (draw area / record route screens).
+/// [parent]: when drawing a subzone, its zone is outlined as a guide.
 Future<void> drawDraft(
   MapLibreMapController controller,
   List<LatLng> points, {
   required bool closed,
+  Zone? parent,
 }) async {
   await controller.clearFills();
   await controller.clearLines();
   await controller.clearCircles();
+
+  if (parent != null && parent.geometry.length >= 3) {
+    await controller.addLine(LineOptions(
+      geometry: GeoUtils.closedRing(parent.geometry),
+      lineColor: ZoneColors.outline,
+      lineWidth: 3,
+    ));
+  }
 
   if (closed && points.length >= 3) {
     await controller.addFill(FillOptions(

@@ -1,6 +1,6 @@
 # PRD — App Cazador
 
-**Versión:** 0.1 (borrador) · **Fecha:** 17/11/2026 · **Estado:** en definición
+**Versión:** 0.2 (borrador) · **Fecha:** 22/11/2026 (v0.2: cambios tras la primera prueba en móvil real) · **Estado:** en definición
 **Documento técnico relacionado:** [ARQUITECTURA.md](ARQUITECTURA.md)
 
 > Este documento define **qué** se construye y **por qué**. El **cómo** (stack, modelo de datos, sincronización) está en `ARQUITECTURA.md`.
@@ -104,7 +104,9 @@ Prioridad: **M** = imprescindible para el MVP · **D** = deseable en el MVP · *
 | RF-14 | Solo el creador puede editar o borrar su zona | M |
 | RF-15 | Botón «Cómo llegar», que abre Google Maps o Waze con el punto de acceso | M |
 | RF-16 | Todo se puede crear y editar sin conexión y se sincroniza solo al recuperar la señal | M |
-| RF-17 | Mapa con vista satélite (ortofoto) y topográfica | M |
+| RF-17 | Mapa con vista satélite (ortofoto PNOA) y mapa base con relieve (IGN Base, más nítido que el MTN escaneado) | M |
+| RF-18 | Al dibujar un área se pueden poner todas las esquinas necesarias, pero la app no deja poner un punto que haga que los lados se crucen y avisa con un mensaje | M |
+| RF-19 | Al terminar de grabar una ruta, el usuario elige «Guardar como ruta» o «Cerrar como área» (la app une el final con el principio). Una ruta ya guardada también se puede cerrar como área | M |
 
 ### 6.3 Mapas sin conexión (`mapas_offline`)
 
@@ -149,6 +151,19 @@ Prioridad: **M** = imprescindible para el MVP · **D** = deseable en el MVP · *
 | RF-57 | Botón **SOS**, que envía un aviso urgente con la ubicación al organizador y a los participantes | M |
 | RF-58 | Sin cobertura, las posiciones se guardan en el móvil y se envían al volver la señal | M |
 | RF-59 | La jornada se cierra sola a las 12 h si nadie la termina | M |
+
+### 6.6 bis Subzonas y características (`zonas`)
+
+Inspirado en cómo Idealista divide una ciudad en distritos y barrios.
+
+| ID | Requisito | Prioridad |
+|---|---|---|
+| RF-70 | Dentro de un área se pueden dibujar subzonas, y dentro de cada subzona más subzonas, sin límite de niveles | M |
+| RF-71 | Una subzona tiene que estar dibujada dentro de su zona. La app no deja poner esquinas fuera y avisa | M |
+| RF-72 | Cada zona o subzona puede anotar: **animales vistos**, **comida y agua** (comedero, bebedero, agua natural, cultivos, bellota, frutales), **peligro** (nivel ninguno/bajo/medio/alto y tipo: barranco, carretera, casas cerca, zona prohibida, ganado, otro) y **encame y pasos** (encame, paso habitual, revolcadero, rascadero, rastros) | M |
+| RF-73 | En la ficha de una subzona se ve en qué zona está («Está en: Coto › Umbría»), con enlace a cada nivel | M |
+| RF-74 | En el mapa, las subzonas se ven en azul sobre su zona, y las zonas con peligro se rellenan en amarillo, naranja o rojo según el nivel | M |
+| RF-75 | Al borrar una zona se borran también todas sus subzonas | M |
 
 ### 6.7 Capturas (`capturas`)
 

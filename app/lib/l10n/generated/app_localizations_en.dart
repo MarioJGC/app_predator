@@ -442,4 +442,129 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get convertToAreaMessage =>
       'The end of the path will be joined to the start.';
+
+  @override
+  String subzonesTitle(int count) {
+    return 'Subareas ($count)';
+  }
+
+  @override
+  String get addSubzone => 'Add subarea';
+
+  @override
+  String get noSubzones => 'This area has no subareas.';
+
+  @override
+  String get drawSubzone => 'Draw subarea';
+
+  @override
+  String subzoneInstructions(String name) {
+    return 'Mark the corners of the subarea inside \"$name\", following the edge in order.';
+  }
+
+  @override
+  String subzoneOutside(String name) {
+    return 'Tap inside \"$name\": a subarea must be inside its area.';
+  }
+
+  @override
+  String get insideOf => 'Inside';
+
+  @override
+  String subzonesCount(int count) {
+    return '$count subareas';
+  }
+
+  @override
+  String get featuresTitle => 'What\'s here';
+
+  @override
+  String get editFeatures => 'Edit what\'s here';
+
+  @override
+  String get noFeatures => 'You haven\'t noted anything in this area yet.';
+
+  @override
+  String get featuresSaved => 'Saved';
+
+  @override
+  String get featAnimals => 'Animals seen';
+
+  @override
+  String get featFoodWater => 'Food and water';
+
+  @override
+  String get featDanger => 'Danger';
+
+  @override
+  String get featDangerLevel => 'Danger level';
+
+  @override
+  String get featDangerTypes => 'What danger';
+
+  @override
+  String get featSigns => 'Bedding and paths';
+
+  @override
+  String get dangerNone => 'None';
+
+  @override
+  String get dangerLow => 'Low';
+
+  @override
+  String get dangerMedium => 'Medium';
+
+  @override
+  String get dangerHigh => 'High';
+
+  @override
+  String get foodFeeder => 'Feeder';
+
+  @override
+  String get foodWaterTrough => 'Water trough';
+
+  @override
+  String get foodNaturalWater => 'Natural water';
+
+  @override
+  String get foodCrops => 'Crops';
+
+  @override
+  String get foodAcorns => 'Acorns';
+
+  @override
+  String get foodFruit => 'Fruit trees';
+
+  @override
+  String get dangerCliff => 'Cliff';
+
+  @override
+  String get dangerRoad => 'Road';
+
+  @override
+  String get dangerHouses => 'Houses nearby';
+
+  @override
+  String get dangerNoHunting => 'No-hunting area';
+
+  @override
+  String get dangerLivestock => 'Livestock';
+
+  @override
+  String get dangerOther => 'Other';
+
+  @override
+  String get signBedding => 'Bedding';
+
+  @override
+  String get signCrossing => 'Usual crossing';
+
+  @override
+  String get signWallow => 'Wallow';
+
+  @override
+  String get signRub => 'Rub tree';
+
+  @override
+  String get signTracks => 'Tracks';
 }

@@ -61,6 +61,11 @@ void main() {
     });
   });
 
+  test('contains tells inside from outside', () {
+    expect(GeoUtils.contains(square, const LatLng(39.5545, -4.3442)), isTrue);
+    expect(GeoUtils.contains(square, const LatLng(39.5700, -4.3442)), isFalse);
+  });
+
   test('expand adds the margin on every side', () {
     final b = GeoUtils.expand(GeoUtils.bounds(square), 1000);
     expect(GeoUtils.distanceMeters(b.southwest, LatLng(sw.latitude, b.southwest.longitude)),
