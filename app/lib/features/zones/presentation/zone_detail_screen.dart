@@ -5,6 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/location/location_service.dart';
 import '../../../core/map/map_layers.dart';
+import '../../../core/map/offline_maps.dart';
 import '../../../core/widgets/confirm_dialog.dart';
 import '../../../core/widgets/info_view.dart';
 import '../../../core/widgets/large_button.dart';
@@ -12,6 +13,7 @@ import '../../../l10n/generated/app_localizations.dart';
 import '../data/zones_repository.dart';
 import '../domain/zone.dart';
 import 'add_point_screen.dart';
+import 'offline_map_panel.dart';
 import 'zone_form_screen.dart';
 import 'zone_labels.dart';
 import 'zone_map_layer.dart';
@@ -48,6 +50,8 @@ class ZoneDetailScreen extends ConsumerWidget {
               padding: const EdgeInsets.all(16),
               children: [
                 _ZoneSummary(zone: zone),
+                const SizedBox(height: 16),
+                OfflineMapPanel(zone: zone),
                 const SizedBox(height: 16),
                 LargeButton(
                   icon: Icons.add_location_alt,
@@ -129,6 +133,7 @@ class ZoneDetailScreen extends ConsumerWidget {
       destructive: true,
     );
     if (!confirmed) return;
+    await ref.read(offlineMapsProvider.notifier).delete(zone.id);
     await ref.read(zonesRepositoryProvider).deleteZone(zone.id);
     navigator.pop();
   }

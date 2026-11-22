@@ -595,6 +595,78 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Esta zona ya no existe.'**
   String get zoneNotFound;
+
+  /// No description provided for @downloadMap.
+  ///
+  /// In es, this message translates to:
+  /// **'Descargar mapa ({size})'**
+  String downloadMap(String size);
+
+  /// No description provided for @downloadMapHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Para verlo sin cobertura en el monte.'**
+  String get downloadMapHint;
+
+  /// No description provided for @downloadingMap.
+  ///
+  /// In es, this message translates to:
+  /// **'Descargando mapa… {percent} %'**
+  String downloadingMap(int percent);
+
+  /// No description provided for @mapDownloaded.
+  ///
+  /// In es, this message translates to:
+  /// **'Mapa descargado ({size})'**
+  String mapDownloaded(String size);
+
+  /// No description provided for @mapDownloadFailed.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pudo descargar el mapa. Comprueba la conexión.'**
+  String get mapDownloadFailed;
+
+  /// No description provided for @retry.
+  ///
+  /// In es, this message translates to:
+  /// **'Reintentar'**
+  String get retry;
+
+  /// No description provided for @deleteMap.
+  ///
+  /// In es, this message translates to:
+  /// **'Borrar mapa descargado'**
+  String get deleteMap;
+
+  /// No description provided for @deleteMapQuestion.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Borrar el mapa descargado de «{name}»?'**
+  String deleteMapQuestion(String name);
+
+  /// No description provided for @offlineMaps.
+  ///
+  /// In es, this message translates to:
+  /// **'Mapas descargados'**
+  String get offlineMaps;
+
+  /// No description provided for @offlineMapsEmpty.
+  ///
+  /// In es, this message translates to:
+  /// **'No tienes mapas descargados.'**
+  String get offlineMapsEmpty;
+
+  /// No description provided for @offlineMapsHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Descarga el mapa desde la ficha de cada zona.'**
+  String get offlineMapsHint;
+
+  /// No description provided for @offlineMapsTotal.
+  ///
+  /// In es, this message translates to:
+  /// **'Espacio usado: {size}'**
+  String offlineMapsTotal(String size);
 }
 
 class _AppLocalizationsDelegate

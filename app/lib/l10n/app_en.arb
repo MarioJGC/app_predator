@@ -82,5 +82,17 @@
   "modalitySmallGame": "Small game",
   "modalityOther": "Other",
   "zoneSaved": "Area saved",
-  "zoneNotFound": "This area no longer exists."
+  "zoneNotFound": "This area no longer exists.",
+  "downloadMap": "Download map ({size})",
+  "downloadMapHint": "To see it without signal in the field.",
+  "downloadingMap": "Downloading map… {percent}%",
+  "mapDownloaded": "Map downloaded ({size})",
+  "mapDownloadFailed": "Couldn't download the map. Check your connection.",
+  "retry": "Try again",
+  "deleteMap": "Delete downloaded map",
+  "deleteMapQuestion": "Delete the downloaded map of \"{name}\"?",
+  "offlineMaps": "Downloaded maps",
+  "offlineMapsEmpty": "You don't have any downloaded maps.",
+  "offlineMapsHint": "Download the map from each area's page.",
+  "offlineMapsTotal": "Space used: {size}"
 }

@@ -271,4 +271,51 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get zoneNotFound => 'Esta zona ya no existe.';
+
+  @override
+  String downloadMap(String size) {
+    return 'Descargar mapa ($size)';
+  }
+
+  @override
+  String get downloadMapHint => 'Para verlo sin cobertura en el monte.';
+
+  @override
+  String downloadingMap(int percent) {
+    return 'Descargando mapa… $percent %';
+  }
+
+  @override
+  String mapDownloaded(String size) {
+    return 'Mapa descargado ($size)';
+  }
+
+  @override
+  String get mapDownloadFailed =>
+      'No se pudo descargar el mapa. Comprueba la conexión.';
+
+  @override
+  String get retry => 'Reintentar';
+
+  @override
+  String get deleteMap => 'Borrar mapa descargado';
+
+  @override
+  String deleteMapQuestion(String name) {
+    return '¿Borrar el mapa descargado de «$name»?';
+  }
+
+  @override
+  String get offlineMaps => 'Mapas descargados';
+
+  @override
+  String get offlineMapsEmpty => 'No tienes mapas descargados.';
+
+  @override
+  String get offlineMapsHint => 'Descarga el mapa desde la ficha de cada zona.';
+
+  @override
+  String offlineMapsTotal(String size) {
+    return 'Espacio usado: $size';
+  }
 }

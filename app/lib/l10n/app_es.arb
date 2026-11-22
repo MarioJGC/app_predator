@@ -103,5 +103,52 @@
         "type": "int"
       }
     }
+  },
+  "downloadMap": "Descargar mapa ({size})",
+  "downloadMapHint": "Para verlo sin cobertura en el monte.",
+  "downloadingMap": "Descargando mapa… {percent} %",
+  "mapDownloaded": "Mapa descargado ({size})",
+  "mapDownloadFailed": "No se pudo descargar el mapa. Comprueba la conexión.",
+  "retry": "Reintentar",
+  "deleteMap": "Borrar mapa descargado",
+  "deleteMapQuestion": "¿Borrar el mapa descargado de «{name}»?",
+  "offlineMaps": "Mapas descargados",
+  "offlineMapsEmpty": "No tienes mapas descargados.",
+  "offlineMapsHint": "Descarga el mapa desde la ficha de cada zona.",
+  "offlineMapsTotal": "Espacio usado: {size}",
+  "@downloadMap": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "@mapDownloaded": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "@offlineMapsTotal": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "@downloadingMap": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "@deleteMapQuestion": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
   }
 }
