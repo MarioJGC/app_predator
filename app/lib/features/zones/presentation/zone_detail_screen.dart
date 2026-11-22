@@ -71,6 +71,24 @@ class ZoneDetailScreen extends ConsumerWidget {
                   primary: false,
                   onPressed: () => _openDirections(context, zone, points),
                 ),
+                if (zone.kind == ZoneKind.route && zone.geometry.length >= 3) ...[
+                  const SizedBox(height: 12),
+                  LargeButton(
+                    icon: Icons.crop_square,
+                    label: l10n.closeAsArea,
+                    primary: false,
+                    onPressed: () async {
+                      final confirmed = await showConfirmDialog(
+                        context,
+                        title: l10n.convertToAreaQuestion(zone.name),
+                        message: l10n.convertToAreaMessage,
+                      );
+                      if (confirmed) {
+                        await ref.read(zonesRepositoryProvider).convertRouteToArea(zone.id);
+                      }
+                    },
+                  ),
+                ],
                 const SizedBox(height: 24),
                 Text(
                   l10n.pointsTitle(points.length),

@@ -257,7 +257,7 @@ abstract class AppLocalizations {
   /// No description provided for @drawAreaInstructions.
   ///
   /// In es, this message translates to:
-  /// **'Toca el mapa para marcar las esquinas de la zona.'**
+  /// **'Toca el mapa para marcar las esquinas, siguiendo el borde de la zona en orden. Puedes poner todas las que necesites.'**
   String get drawAreaInstructions;
 
   /// No description provided for @undo.
@@ -847,6 +847,54 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'No se pudo descargar el mapa de «{name}».'**
   String mapFailedNotice(String name);
+
+  /// No description provided for @crossingNotAllowed.
+  ///
+  /// In es, this message translates to:
+  /// **'Ese punto haría que las líneas se crucen. Toca en otro sitio, siguiendo el borde en orden.'**
+  String get crossingNotAllowed;
+
+  /// No description provided for @routeSaveQuestion.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Cómo quieres guardar el recorrido?'**
+  String get routeSaveQuestion;
+
+  /// No description provided for @saveAsRoute.
+  ///
+  /// In es, this message translates to:
+  /// **'Guardar como ruta'**
+  String get saveAsRoute;
+
+  /// No description provided for @saveAsRouteHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Un camino, sin cerrar.'**
+  String get saveAsRouteHint;
+
+  /// No description provided for @closeAsArea.
+  ///
+  /// In es, this message translates to:
+  /// **'Cerrar como área'**
+  String get closeAsArea;
+
+  /// No description provided for @closeAsAreaHint.
+  ///
+  /// In es, this message translates to:
+  /// **'La app une el final con el principio y crea una zona.'**
+  String get closeAsAreaHint;
+
+  /// No description provided for @convertToAreaQuestion.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Cerrar la ruta «{name}» y convertirla en un área?'**
+  String convertToAreaQuestion(String name);
+
+  /// No description provided for @convertToAreaMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'Se unirá el final del camino con el principio.'**
+  String get convertToAreaMessage;
 }
 
 class _AppLocalizationsDelegate

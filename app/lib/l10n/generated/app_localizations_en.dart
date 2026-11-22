@@ -93,7 +93,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get drawAreaInstructions =>
-      'Tap the map to mark the corners of the area.';
+      'Tap the map to mark the corners, following the edge of the area in order. Add as many as you need.';
 
   @override
   String get undo => 'Undo';
@@ -413,4 +413,33 @@ class AppLocalizationsEn extends AppLocalizations {
   String mapFailedNotice(String name) {
     return 'Couldn\'t download the map of \"$name\".';
   }
+
+  @override
+  String get crossingNotAllowed =>
+      'That point would make the lines cross. Tap somewhere else, following the edge in order.';
+
+  @override
+  String get routeSaveQuestion => 'How do you want to save the track?';
+
+  @override
+  String get saveAsRoute => 'Save as route';
+
+  @override
+  String get saveAsRouteHint => 'A path, not closed.';
+
+  @override
+  String get closeAsArea => 'Close as area';
+
+  @override
+  String get closeAsAreaHint =>
+      'The app joins the end with the start and creates an area.';
+
+  @override
+  String convertToAreaQuestion(String name) {
+    return 'Close the route \"$name\" and turn it into an area?';
+  }
+
+  @override
+  String get convertToAreaMessage =>
+      'The end of the path will be joined to the start.';
 }

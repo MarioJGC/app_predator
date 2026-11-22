@@ -103,6 +103,48 @@ abstract final class GeoUtils {
     return sum.abs() / 2;
   }
 
+  /// True if adding [next] to the polygon [corners] would make two of its
+  /// sides cross (a "bow tie" shape). Checks the new side (last → next) and
+  /// the closing side (next → first) against the sides they don't touch.
+  static bool wouldCross(List<LatLng> corners, LatLng next) {
+    final n = corners.length;
+    if (n < 3) return false;
+    final last = corners[n - 1];
+    final first = corners[0];
+    for (var i = 0; i < n - 1; i++) {
+      final a = corners[i];
+      final b = corners[i + 1];
+      // New side last → next: skip the side that ends at `last`.
+      if (i < n - 2 && _segmentsCross(last, next, a, b)) return true;
+      // Closing side next → first: skip the side that starts at `first`.
+      if (i > 0 && _segmentsCross(next, first, a, b)) return true;
+    }
+    return false;
+  }
+
+  /// True if the polygon has no crossing sides.
+  static bool isSimplePolygon(List<LatLng> polygon) {
+    for (var i = 3; i <= polygon.length; i++) {
+      if (i == polygon.length) break;
+      if (wouldCross(polygon.sublist(0, i), polygon[i])) return false;
+    }
+    return true;
+  }
+
+  /// Proper crossing of segments p1-p2 and q1-q2 (touching ends don't count).
+  /// Flat lng/lat maths is fine for areas a few km wide.
+  static bool _segmentsCross(LatLng p1, LatLng p2, LatLng q1, LatLng q2) {
+    double cross(LatLng o, LatLng a, LatLng b) =>
+        (a.longitude - o.longitude) * (b.latitude - o.latitude) -
+        (a.latitude - o.latitude) * (b.longitude - o.longitude);
+    final d1 = cross(q1, q2, p1);
+    final d2 = cross(q1, q2, p2);
+    final d3 = cross(p1, p2, q1);
+    final d4 = cross(p1, p2, q2);
+    return ((d1 > 0 && d2 < 0) || (d1 < 0 && d2 > 0)) &&
+        ((d3 > 0 && d4 < 0) || (d3 < 0 && d4 > 0));
+  }
+
   /// Polygon ring with the first point repeated at the end.
   static List<LatLng> closedRing(List<LatLng> polygon) =>
       polygon.isEmpty ? polygon : [...polygon, polygon.first];
