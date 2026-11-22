@@ -80,6 +80,32 @@ class $ZonesTable extends Zones with TableInfo<$ZonesTable, ZoneRow> {
     type: DriftSqlType.string,
     requiredDuringInsert: false,
   );
+  static const VerificationMeta _parentIdMeta = const VerificationMeta(
+    'parentId',
+  );
+  @override
+  late final GeneratedColumn<String> parentId = GeneratedColumn<String>(
+    'parent_id',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES zones (id)',
+    ),
+  );
+  static const VerificationMeta _featuresMeta = const VerificationMeta(
+    'features',
+  );
+  @override
+  late final GeneratedColumn<String> features = GeneratedColumn<String>(
+    'features',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('{}'),
+  );
   static const VerificationMeta _createdAtMeta = const VerificationMeta(
     'createdAt',
   );
@@ -122,6 +148,8 @@ class $ZonesTable extends Zones with TableInfo<$ZonesTable, ZoneRow> {
     geometry,
     species,
     modality,
+    parentId,
+    features,
     createdAt,
     updatedAt,
     deletedAt,
@@ -188,6 +216,18 @@ class $ZonesTable extends Zones with TableInfo<$ZonesTable, ZoneRow> {
         modality.isAcceptableOrUnknown(data['modality']!, _modalityMeta),
       );
     }
+    if (data.containsKey('parent_id')) {
+      context.handle(
+        _parentIdMeta,
+        parentId.isAcceptableOrUnknown(data['parent_id']!, _parentIdMeta),
+      );
+    }
+    if (data.containsKey('features')) {
+      context.handle(
+        _featuresMeta,
+        features.isAcceptableOrUnknown(data['features']!, _featuresMeta),
+      );
+    }
     if (data.containsKey('created_at')) {
       context.handle(
         _createdAtMeta,
@@ -247,6 +287,14 @@ class $ZonesTable extends Zones with TableInfo<$ZonesTable, ZoneRow> {
         DriftSqlType.string,
         data['${effectivePrefix}modality'],
       ),
+      parentId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}parent_id'],
+      ),
+      features: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}features'],
+      )!,
       createdAt: attachedDatabase.typeMapping.read(
         DriftSqlType.dateTime,
         data['${effectivePrefix}created_at'],
@@ -283,6 +331,14 @@ class ZoneRow extends DataClass implements Insertable<ZoneRow> {
   /// Comma-separated species keys, e.g. "wild_boar,red_deer".
   final String species;
   final String? modality;
+
+  /// Zone that contains this one (subzone). Null for top-level zones.
+  /// Any depth is allowed: zone → subzone → sub-subzone...
+  final String? parentId;
+
+  /// JSON with what is in the zone: animals, food & water, danger,
+  /// bedding & paths. See `ZoneFeatures`.
+  final String features;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -296,6 +352,8 @@ class ZoneRow extends DataClass implements Insertable<ZoneRow> {
     required this.geometry,
     required this.species,
     this.modality,
+    this.parentId,
+    required this.features,
     required this.createdAt,
     required this.updatedAt,
     this.deletedAt,
@@ -314,6 +372,10 @@ class ZoneRow extends DataClass implements Insertable<ZoneRow> {
     if (!nullToAbsent || modality != null) {
       map['modality'] = Variable<String>(modality);
     }
+    if (!nullToAbsent || parentId != null) {
+      map['parent_id'] = Variable<String>(parentId);
+    }
+    map['features'] = Variable<String>(features);
     map['created_at'] = Variable<DateTime>(createdAt);
     map['updated_at'] = Variable<DateTime>(updatedAt);
     if (!nullToAbsent || deletedAt != null) {
@@ -335,6 +397,10 @@ class ZoneRow extends DataClass implements Insertable<ZoneRow> {
       modality: modality == null && nullToAbsent
           ? const Value.absent()
           : Value(modality),
+      parentId: parentId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(parentId),
+      features: Value(features),
       createdAt: Value(createdAt),
       updatedAt: Value(updatedAt),
       deletedAt: deletedAt == null && nullToAbsent
@@ -356,6 +422,8 @@ class ZoneRow extends DataClass implements Insertable<ZoneRow> {
       geometry: serializer.fromJson<String>(json['geometry']),
       species: serializer.fromJson<String>(json['species']),
       modality: serializer.fromJson<String?>(json['modality']),
+      parentId: serializer.fromJson<String?>(json['parentId']),
+      features: serializer.fromJson<String>(json['features']),
       createdAt: serializer.fromJson<DateTime>(json['createdAt']),
       updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
       deletedAt: serializer.fromJson<DateTime?>(json['deletedAt']),
@@ -372,6 +440,8 @@ class ZoneRow extends DataClass implements Insertable<ZoneRow> {
       'geometry': serializer.toJson<String>(geometry),
       'species': serializer.toJson<String>(species),
       'modality': serializer.toJson<String?>(modality),
+      'parentId': serializer.toJson<String?>(parentId),
+      'features': serializer.toJson<String>(features),
       'createdAt': serializer.toJson<DateTime>(createdAt),
       'updatedAt': serializer.toJson<DateTime>(updatedAt),
       'deletedAt': serializer.toJson<DateTime?>(deletedAt),
@@ -386,6 +456,8 @@ class ZoneRow extends DataClass implements Insertable<ZoneRow> {
     String? geometry,
     String? species,
     Value<String?> modality = const Value.absent(),
+    Value<String?> parentId = const Value.absent(),
+    String? features,
     DateTime? createdAt,
     DateTime? updatedAt,
     Value<DateTime?> deletedAt = const Value.absent(),
@@ -397,6 +469,8 @@ class ZoneRow extends DataClass implements Insertable<ZoneRow> {
     geometry: geometry ?? this.geometry,
     species: species ?? this.species,
     modality: modality.present ? modality.value : this.modality,
+    parentId: parentId.present ? parentId.value : this.parentId,
+    features: features ?? this.features,
     createdAt: createdAt ?? this.createdAt,
     updatedAt: updatedAt ?? this.updatedAt,
     deletedAt: deletedAt.present ? deletedAt.value : this.deletedAt,
@@ -412,6 +486,8 @@ class ZoneRow extends DataClass implements Insertable<ZoneRow> {
       geometry: data.geometry.present ? data.geometry.value : this.geometry,
       species: data.species.present ? data.species.value : this.species,
       modality: data.modality.present ? data.modality.value : this.modality,
+      parentId: data.parentId.present ? data.parentId.value : this.parentId,
+      features: data.features.present ? data.features.value : this.features,
       createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
       updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
       deletedAt: data.deletedAt.present ? data.deletedAt.value : this.deletedAt,
@@ -428,6 +504,8 @@ class ZoneRow extends DataClass implements Insertable<ZoneRow> {
           ..write('geometry: $geometry, ')
           ..write('species: $species, ')
           ..write('modality: $modality, ')
+          ..write('parentId: $parentId, ')
+          ..write('features: $features, ')
           ..write('createdAt: $createdAt, ')
           ..write('updatedAt: $updatedAt, ')
           ..write('deletedAt: $deletedAt')
@@ -444,6 +522,8 @@ class ZoneRow extends DataClass implements Insertable<ZoneRow> {
     geometry,
     species,
     modality,
+    parentId,
+    features,
     createdAt,
     updatedAt,
     deletedAt,
@@ -459,6 +539,8 @@ class ZoneRow extends DataClass implements Insertable<ZoneRow> {
           other.geometry == this.geometry &&
           other.species == this.species &&
           other.modality == this.modality &&
+          other.parentId == this.parentId &&
+          other.features == this.features &&
           other.createdAt == this.createdAt &&
           other.updatedAt == this.updatedAt &&
           other.deletedAt == this.deletedAt);
@@ -472,6 +554,8 @@ class ZonesCompanion extends UpdateCompanion<ZoneRow> {
   final Value<String> geometry;
   final Value<String> species;
   final Value<String?> modality;
+  final Value<String?> parentId;
+  final Value<String> features;
   final Value<DateTime> createdAt;
   final Value<DateTime> updatedAt;
   final Value<DateTime?> deletedAt;
@@ -484,6 +568,8 @@ class ZonesCompanion extends UpdateCompanion<ZoneRow> {
     this.geometry = const Value.absent(),
     this.species = const Value.absent(),
     this.modality = const Value.absent(),
+    this.parentId = const Value.absent(),
+    this.features = const Value.absent(),
     this.createdAt = const Value.absent(),
     this.updatedAt = const Value.absent(),
     this.deletedAt = const Value.absent(),
@@ -497,6 +583,8 @@ class ZonesCompanion extends UpdateCompanion<ZoneRow> {
     required String geometry,
     this.species = const Value.absent(),
     this.modality = const Value.absent(),
+    this.parentId = const Value.absent(),
+    this.features = const Value.absent(),
     required DateTime createdAt,
     required DateTime updatedAt,
     this.deletedAt = const Value.absent(),
@@ -515,6 +603,8 @@ class ZonesCompanion extends UpdateCompanion<ZoneRow> {
     Expression<String>? geometry,
     Expression<String>? species,
     Expression<String>? modality,
+    Expression<String>? parentId,
+    Expression<String>? features,
     Expression<DateTime>? createdAt,
     Expression<DateTime>? updatedAt,
     Expression<DateTime>? deletedAt,
@@ -528,6 +618,8 @@ class ZonesCompanion extends UpdateCompanion<ZoneRow> {
       if (geometry != null) 'geometry': geometry,
       if (species != null) 'species': species,
       if (modality != null) 'modality': modality,
+      if (parentId != null) 'parent_id': parentId,
+      if (features != null) 'features': features,
       if (createdAt != null) 'created_at': createdAt,
       if (updatedAt != null) 'updated_at': updatedAt,
       if (deletedAt != null) 'deleted_at': deletedAt,
@@ -543,6 +635,8 @@ class ZonesCompanion extends UpdateCompanion<ZoneRow> {
     Value<String>? geometry,
     Value<String>? species,
     Value<String?>? modality,
+    Value<String?>? parentId,
+    Value<String>? features,
     Value<DateTime>? createdAt,
     Value<DateTime>? updatedAt,
     Value<DateTime?>? deletedAt,
@@ -556,6 +650,8 @@ class ZonesCompanion extends UpdateCompanion<ZoneRow> {
       geometry: geometry ?? this.geometry,
       species: species ?? this.species,
       modality: modality ?? this.modality,
+      parentId: parentId ?? this.parentId,
+      features: features ?? this.features,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
       deletedAt: deletedAt ?? this.deletedAt,
@@ -587,6 +683,12 @@ class ZonesCompanion extends UpdateCompanion<ZoneRow> {
     if (modality.present) {
       map['modality'] = Variable<String>(modality.value);
     }
+    if (parentId.present) {
+      map['parent_id'] = Variable<String>(parentId.value);
+    }
+    if (features.present) {
+      map['features'] = Variable<String>(features.value);
+    }
     if (createdAt.present) {
       map['created_at'] = Variable<DateTime>(createdAt.value);
     }
@@ -612,6 +714,8 @@ class ZonesCompanion extends UpdateCompanion<ZoneRow> {
           ..write('geometry: $geometry, ')
           ..write('species: $species, ')
           ..write('modality: $modality, ')
+          ..write('parentId: $parentId, ')
+          ..write('features: $features, ')
           ..write('createdAt: $createdAt, ')
           ..write('updatedAt: $updatedAt, ')
           ..write('deletedAt: $deletedAt, ')
@@ -2173,6 +2277,8 @@ typedef $$ZonesTableCreateCompanionBuilder = ZonesCompanion Function({
   required String geometry,
   Value<String> species,
   Value<String?> modality,
+  Value<String?> parentId,
+  Value<String> features,
   required DateTime createdAt,
   required DateTime updatedAt,
   Value<DateTime?> deletedAt,
@@ -2186,6 +2292,8 @@ typedef $$ZonesTableUpdateCompanionBuilder = ZonesCompanion Function({
   Value<String> geometry,
   Value<String> species,
   Value<String?> modality,
+  Value<String?> parentId,
+  Value<String> features,
   Value<DateTime> createdAt,
   Value<DateTime> updatedAt,
   Value<DateTime?> deletedAt,
@@ -2195,6 +2303,23 @@ typedef $$ZonesTableUpdateCompanionBuilder = ZonesCompanion Function({
 final class $$ZonesTableReferences
     extends BaseReferences<_$AppDatabase, $ZonesTable, ZoneRow> {
   $$ZonesTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static $ZonesTable _parentIdTable(_$AppDatabase db) =>
+      db.zones.createAlias('zones__parent_id__zones__id');
+
+  $$ZonesTableProcessedTableManager? get parentId {
+    final $_column = $_itemColumn<String>('parent_id');
+    if ($_column == null) return null;
+    final manager = $$ZonesTableTableManager(
+      $_db,
+      $_db.zones,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_parentIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
 
   static MultiTypedResultKey<$ZonePointsTable, List<ZonePointRow>>
   _zonePointsRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
@@ -2258,6 +2383,11 @@ class $$ZonesTableFilterComposer extends Composer<_$AppDatabase, $ZonesTable> {
     builder: (column) => ColumnFilters(column),
   );
 
+  ColumnFilters<String> get features => $composableBuilder(
+    column: $table.features,
+    builder: (column) => ColumnFilters(column),
+  );
+
   ColumnFilters<DateTime> get createdAt => $composableBuilder(
     column: $table.createdAt,
     builder: (column) => ColumnFilters(column),
@@ -2272,6 +2402,29 @@ class $$ZonesTableFilterComposer extends Composer<_$AppDatabase, $ZonesTable> {
     column: $table.deletedAt,
     builder: (column) => ColumnFilters(column),
   );
+
+  $$ZonesTableFilterComposer get parentId {
+    final $$ZonesTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.parentId,
+      referencedTable: $db.zones,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ZonesTableFilterComposer(
+            $db: $db,
+            $table: $db.zones,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
 
   Expression<bool> zonePointsRefs(
     Expression<bool> Function($$ZonePointsTableFilterComposer f) f,
@@ -2343,6 +2496,11 @@ class $$ZonesTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
+  ColumnOrderings<String> get features => $composableBuilder(
+    column: $table.features,
+    builder: (column) => ColumnOrderings(column),
+  );
+
   ColumnOrderings<DateTime> get createdAt => $composableBuilder(
     column: $table.createdAt,
     builder: (column) => ColumnOrderings(column),
@@ -2357,6 +2515,29 @@ class $$ZonesTableOrderingComposer
     column: $table.deletedAt,
     builder: (column) => ColumnOrderings(column),
   );
+
+  $$ZonesTableOrderingComposer get parentId {
+    final $$ZonesTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.parentId,
+      referencedTable: $db.zones,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ZonesTableOrderingComposer(
+            $db: $db,
+            $table: $db.zones,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
 }
 
 class $$ZonesTableAnnotationComposer
@@ -2391,6 +2572,9 @@ class $$ZonesTableAnnotationComposer
   GeneratedColumn<String> get modality =>
       $composableBuilder(column: $table.modality, builder: (column) => column);
 
+  GeneratedColumn<String> get features =>
+      $composableBuilder(column: $table.features, builder: (column) => column);
+
   GeneratedColumn<DateTime> get createdAt =>
       $composableBuilder(column: $table.createdAt, builder: (column) => column);
 
@@ -2399,6 +2583,29 @@ class $$ZonesTableAnnotationComposer
 
   GeneratedColumn<DateTime> get deletedAt =>
       $composableBuilder(column: $table.deletedAt, builder: (column) => column);
+
+  $$ZonesTableAnnotationComposer get parentId {
+    final $$ZonesTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.parentId,
+      referencedTable: $db.zones,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ZonesTableAnnotationComposer(
+            $db: $db,
+            $table: $db.zones,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
 
   Expression<T> zonePointsRefs<T extends Object>(
     Expression<T> Function($$ZonePointsTableAnnotationComposer a) f,
@@ -2439,7 +2646,7 @@ class $$ZonesTableTableManager
           $$ZonesTableUpdateCompanionBuilder,
           (ZoneRow, $$ZonesTableReferences),
           ZoneRow,
-          PrefetchHooks Function({bool zonePointsRefs})
+          PrefetchHooks Function({bool parentId, bool zonePointsRefs})
         > {
   $$ZonesTableTableManager(_$AppDatabase db, $ZonesTable table)
     : super(
@@ -2461,6 +2668,8 @@ class $$ZonesTableTableManager
                 Value<String> geometry = const Value.absent(),
                 Value<String> species = const Value.absent(),
                 Value<String?> modality = const Value.absent(),
+                Value<String?> parentId = const Value.absent(),
+                Value<String> features = const Value.absent(),
                 Value<DateTime> createdAt = const Value.absent(),
                 Value<DateTime> updatedAt = const Value.absent(),
                 Value<DateTime?> deletedAt = const Value.absent(),
@@ -2473,6 +2682,8 @@ class $$ZonesTableTableManager
                 geometry: geometry,
                 species: species,
                 modality: modality,
+                parentId: parentId,
+                features: features,
                 createdAt: createdAt,
                 updatedAt: updatedAt,
                 deletedAt: deletedAt,
@@ -2487,6 +2698,8 @@ class $$ZonesTableTableManager
                 required String geometry,
                 Value<String> species = const Value.absent(),
                 Value<String?> modality = const Value.absent(),
+                Value<String?> parentId = const Value.absent(),
+                Value<String> features = const Value.absent(),
                 required DateTime createdAt,
                 required DateTime updatedAt,
                 Value<DateTime?> deletedAt = const Value.absent(),
@@ -2499,6 +2712,8 @@ class $$ZonesTableTableManager
                 geometry: geometry,
                 species: species,
                 modality: modality,
+                parentId: parentId,
+                features: features,
                 createdAt: createdAt,
                 updatedAt: updatedAt,
                 deletedAt: deletedAt,
@@ -2512,11 +2727,41 @@ class $$ZonesTableTableManager
                 ),
               )
               .toList(),
-          prefetchHooksCallback: ({zonePointsRefs = false}) {
+          prefetchHooksCallback: ({parentId = false, zonePointsRefs = false}) {
             return PrefetchHooks(
               db: db,
               explicitlyWatchedTables: [if (zonePointsRefs) db.zonePoints],
-              addJoins: null,
+              addJoins:
+                  <
+                    T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic
+                    >
+                  >(state) {
+                    if (parentId) {
+                      state = state.withJoin(
+                        currentTable: table,
+                        currentColumn: table.parentId,
+                        referencedTable: $$ZonesTableReferences._parentIdTable(
+                          db,
+                        ),
+                        referencedColumn: $$ZonesTableReferences
+                            ._parentIdTable(db)
+                            .id,
+                      ) as T;
+                    }
+
+                    return state;
+                  },
               getPrefetchedDataCallback: (items) async {
                 return [
                   if (zonePointsRefs)
@@ -2555,7 +2800,7 @@ typedef $$ZonesTableProcessedTableManager =
       $$ZonesTableUpdateCompanionBuilder,
       (ZoneRow, $$ZonesTableReferences),
       ZoneRow,
-      PrefetchHooks Function({bool zonePointsRefs})
+      PrefetchHooks Function({bool parentId, bool zonePointsRefs})
     >;
 typedef $$ZonePointsTableCreateCompanionBuilder = ZonePointsCompanion Function({
   required String id,

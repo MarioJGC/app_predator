@@ -443,4 +443,129 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get convertToAreaMessage =>
       'Se unirá el final del camino con el principio.';
+
+  @override
+  String subzonesTitle(int count) {
+    return 'Subzonas ($count)';
+  }
+
+  @override
+  String get addSubzone => 'Añadir subzona';
+
+  @override
+  String get noSubzones => 'Esta zona no tiene subzonas.';
+
+  @override
+  String get drawSubzone => 'Dibujar subzona';
+
+  @override
+  String subzoneInstructions(String name) {
+    return 'Marca las esquinas de la subzona dentro de «$name», siguiendo el borde en orden.';
+  }
+
+  @override
+  String subzoneOutside(String name) {
+    return 'Toca dentro de «$name»: una subzona tiene que estar dentro de su zona.';
+  }
+
+  @override
+  String get insideOf => 'Está en';
+
+  @override
+  String subzonesCount(int count) {
+    return '$count subzonas';
+  }
+
+  @override
+  String get featuresTitle => 'Características';
+
+  @override
+  String get editFeatures => 'Editar características';
+
+  @override
+  String get noFeatures => 'Todavía no has anotado nada en esta zona.';
+
+  @override
+  String get featuresSaved => 'Características guardadas';
+
+  @override
+  String get featAnimals => 'Animales vistos';
+
+  @override
+  String get featFoodWater => 'Comida y agua';
+
+  @override
+  String get featDanger => 'Peligro';
+
+  @override
+  String get featDangerLevel => 'Nivel de peligro';
+
+  @override
+  String get featDangerTypes => 'Qué peligro hay';
+
+  @override
+  String get featSigns => 'Encame y pasos';
+
+  @override
+  String get dangerNone => 'Ninguno';
+
+  @override
+  String get dangerLow => 'Bajo';
+
+  @override
+  String get dangerMedium => 'Medio';
+
+  @override
+  String get dangerHigh => 'Alto';
+
+  @override
+  String get foodFeeder => 'Comedero';
+
+  @override
+  String get foodWaterTrough => 'Bebedero';
+
+  @override
+  String get foodNaturalWater => 'Agua natural';
+
+  @override
+  String get foodCrops => 'Cultivos';
+
+  @override
+  String get foodAcorns => 'Bellota';
+
+  @override
+  String get foodFruit => 'Frutales';
+
+  @override
+  String get dangerCliff => 'Barranco';
+
+  @override
+  String get dangerRoad => 'Carretera';
+
+  @override
+  String get dangerHouses => 'Casas cerca';
+
+  @override
+  String get dangerNoHunting => 'Zona prohibida';
+
+  @override
+  String get dangerLivestock => 'Ganado';
+
+  @override
+  String get dangerOther => 'Otro';
+
+  @override
+  String get signBedding => 'Encame';
+
+  @override
+  String get signCrossing => 'Paso habitual';
+
+  @override
+  String get signWallow => 'Revolcadero';
+
+  @override
+  String get signRub => 'Rascadero';
+
+  @override
+  String get signTracks => 'Rastros';
 }

@@ -219,5 +219,72 @@
         "type": "String"
       }
     }
+  },
+  "subzonesTitle": "Subzonas ({count})",
+  "addSubzone": "Añadir subzona",
+  "noSubzones": "Esta zona no tiene subzonas.",
+  "drawSubzone": "Dibujar subzona",
+  "subzoneInstructions": "Marca las esquinas de la subzona dentro de «{name}», siguiendo el borde en orden.",
+  "subzoneOutside": "Toca dentro de «{name}»: una subzona tiene que estar dentro de su zona.",
+  "insideOf": "Está en",
+  "subzonesCount": "{count} subzonas",
+  "featuresTitle": "Características",
+  "editFeatures": "Editar características",
+  "noFeatures": "Todavía no has anotado nada en esta zona.",
+  "featuresSaved": "Características guardadas",
+  "featAnimals": "Animales vistos",
+  "featFoodWater": "Comida y agua",
+  "featDanger": "Peligro",
+  "featDangerLevel": "Nivel de peligro",
+  "featDangerTypes": "Qué peligro hay",
+  "featSigns": "Encame y pasos",
+  "dangerNone": "Ninguno",
+  "dangerLow": "Bajo",
+  "dangerMedium": "Medio",
+  "dangerHigh": "Alto",
+  "foodFeeder": "Comedero",
+  "foodWaterTrough": "Bebedero",
+  "foodNaturalWater": "Agua natural",
+  "foodCrops": "Cultivos",
+  "foodAcorns": "Bellota",
+  "foodFruit": "Frutales",
+  "dangerCliff": "Barranco",
+  "dangerRoad": "Carretera",
+  "dangerHouses": "Casas cerca",
+  "dangerNoHunting": "Zona prohibida",
+  "dangerLivestock": "Ganado",
+  "dangerOther": "Otro",
+  "signBedding": "Encame",
+  "signCrossing": "Paso habitual",
+  "signWallow": "Revolcadero",
+  "signRub": "Rascadero",
+  "signTracks": "Rastros",
+  "@subzonesTitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "@subzonesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "@subzoneInstructions": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "@subzoneOutside": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
   }
 }

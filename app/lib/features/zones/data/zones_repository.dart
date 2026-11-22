@@ -6,6 +6,7 @@ import 'package:uuid/uuid.dart';
 import '../../../core/geo/geo_utils.dart';
 import '../../../data/local/app_database.dart';
 import '../domain/zone.dart';
+import '../domain/zone_features.dart';
 
 /// Reads and writes zones and points in the local database.
 /// Every change is also added to the sync queue (outbox).
@@ -17,10 +18,24 @@ class ZonesRepository {
 
   // ---------- Reads ----------
 
+  /// Every zone and subzone (for the map).
   Stream<List<Zone>> watchZones() {
     final query = _db.select(_db.zones)
       ..where((z) => z.deletedAt.isNull())
       ..orderBy([(z) => OrderingTerm.desc(z.updatedAt)]);
+    return query.watch().map((rows) => rows.map(_toZone).toList());
+  }
+
+  /// Direct children of [parentId], or top-level zones if it is null.
+  Stream<List<Zone>> watchChildren(String? parentId) {
+    final query = _db.select(_db.zones)
+      ..where((z) {
+        final notDeleted = z.deletedAt.isNull();
+        return parentId == null
+            ? notDeleted & z.parentId.isNull()
+            : notDeleted & z.parentId.equals(parentId);
+      })
+      ..orderBy([(z) => OrderingTerm.asc(z.name)]);
     return query.watch().map((rows) => rows.map(_toZone).toList());
   }
 
@@ -50,6 +65,7 @@ class ZonesRepository {
     String? description,
     List<String> species = const [],
     String? modality,
+    String? parentId,
   }) async {
     final id = _uuid.v4();
     final now = DateTime.now();
@@ -62,6 +78,7 @@ class ZonesRepository {
             geometry: GeoUtils.encode(geometry),
             species: Value(species.join(',')),
             modality: Value(modality),
+            parentId: Value(parentId),
             createdAt: now,
             updatedAt: now,
           ));
@@ -91,6 +108,18 @@ class ZonesRepository {
     });
   }
 
+  Future<void> updateFeatures(String id, ZoneFeatures features) {
+    return _db.transaction(() async {
+      await (_db.update(_db.zones)..where((z) => z.id.equals(id))).write(
+        ZonesCompanion(
+          features: Value(features.toJson()),
+          updatedAt: Value(DateTime.now()),
+        ),
+      );
+      await _enqueue('zones', id, 'upsert');
+    });
+  }
+
   /// Turns a recorded route into an area: the polygon closes itself
   /// (last point joined to the first).
   Future<void> convertRouteToArea(String id) {
@@ -105,18 +134,37 @@ class ZonesRepository {
     });
   }
 
-  /// Soft-deletes the zone and all its points.
+  /// Soft-deletes the zone, all its subzones (any depth) and their points.
   Future<void> deleteZone(String id) {
     final now = DateTime.now();
     return _db.transaction(() async {
-      await (_db.update(_db.zones)..where((z) => z.id.equals(id))).write(
-        ZonesCompanion(deletedAt: Value(now), updatedAt: Value(now)),
-      );
-      await (_db.update(_db.zonePoints)
-            ..where((p) => p.zoneId.equals(id) & p.deletedAt.isNull()))
-          .write(ZonePointsCompanion(deletedAt: Value(now), updatedAt: Value(now)));
-      await _enqueue('zones', id, 'delete');
+      for (final zoneId in await _withDescendants(id)) {
+        await (_db.update(_db.zones)..where((z) => z.id.equals(zoneId))).write(
+          ZonesCompanion(deletedAt: Value(now), updatedAt: Value(now)),
+        );
+        await (_db.update(_db.zonePoints)
+              ..where((p) => p.zoneId.equals(zoneId) & p.deletedAt.isNull()))
+            .write(ZonePointsCompanion(deletedAt: Value(now), updatedAt: Value(now)));
+        await _enqueue('zones', zoneId, 'delete');
+      }
     });
+  }
+
+  /// [id] plus every subzone below it, parents first.
+  Future<List<String>> _withDescendants(String id) async {
+    final rows = await (_db.select(_db.zones)..where((z) => z.deletedAt.isNull())).get();
+    final children = <String, List<String>>{};
+    for (final row in rows) {
+      if (row.parentId != null) (children[row.parentId!] ??= []).add(row.id);
+    }
+    final result = <String>[];
+    final pending = [id];
+    while (pending.isNotEmpty) {
+      final current = pending.removeAt(0);
+      result.add(current);
+      pending.addAll(children[current] ?? const []);
+    }
+    return result;
   }
 
   Future<String> addPoint({
@@ -175,6 +223,8 @@ class ZonesRepository {
         geometry: GeoUtils.decode(row.geometry),
         species: row.species.isEmpty ? const [] : row.species.split(','),
         modality: row.modality,
+        parentId: row.parentId,
+        features: ZoneFeatures.fromJson(row.features),
       );
 
   static ZonePoint _toPoint(ZonePointRow row) => ZonePoint(
@@ -199,6 +249,11 @@ final zonesRepositoryProvider =
 
 final zonesProvider = StreamProvider<List<Zone>>(
   (ref) => ref.watch(zonesRepositoryProvider).watchZones(),
+);
+
+/// Top-level zones (parentId null) or the subzones of a zone.
+final childZonesProvider = StreamProvider.family<List<Zone>, String?>(
+  (ref, parentId) => ref.watch(zonesRepositoryProvider).watchChildren(parentId),
 );
 
 final zoneProvider = StreamProvider.family<Zone?, String>(

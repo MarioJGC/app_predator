@@ -1,6 +1,7 @@
 import 'package:maplibre_gl/maplibre_gl.dart';
 
 import '../../../core/geo/geo_utils.dart';
+import 'zone_features.dart';
 
 enum ZoneKind { area, route }
 
@@ -16,9 +17,17 @@ class Zone {
     this.description,
     this.species = const [],
     this.modality,
+    this.parentId,
+    this.features = const ZoneFeatures(),
   });
 
   final String id;
+
+  /// Zone that contains this one, or null for a top-level zone.
+  final String? parentId;
+
+  /// Animals, food & water, danger, bedding & paths noted here.
+  final ZoneFeatures features;
   final String name;
   final String? description;
   final ZoneKind kind;
@@ -31,6 +40,8 @@ class Zone {
 
   /// Modality key, see [huntingModalities].
   final String? modality;
+
+  bool get isSubzone => parentId != null;
 
   LatLngBounds get bounds => GeoUtils.bounds(geometry);
   LatLng get center => GeoUtils.centroid(geometry);

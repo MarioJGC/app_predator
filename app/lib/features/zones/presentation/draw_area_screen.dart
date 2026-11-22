@@ -15,10 +15,12 @@ import 'zone_form_screen.dart';
 import 'zone_map_layer.dart';
 
 /// Step 1 of creating an area: tap the map to place the corners.
+/// With [parent], draws a subzone that must stay inside that zone.
 class DrawAreaScreen extends ConsumerStatefulWidget {
-  const DrawAreaScreen({super.key, required this.initialCamera});
+  const DrawAreaScreen({super.key, required this.initialCamera, this.parent});
 
   final CameraPosition initialCamera;
+  final Zone? parent;
 
   @override
   ConsumerState<DrawAreaScreen> createState() => _DrawAreaScreenState();
@@ -28,14 +30,22 @@ class _DrawAreaScreenState extends ConsumerState<DrawAreaScreen> {
   MapLibreMapController? _controller;
   final List<LatLng> _corners = [];
 
+  void _warn(String text) {
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(SnackBar(content: Text(text)));
+  }
+
   void _addCorner(Point<double> _, LatLng position) {
+    final l10n = AppLocalizations.of(context);
+    final parent = widget.parent;
+    if (parent != null && !GeoUtils.contains(parent.geometry, position)) {
+      _warn(l10n.subzoneOutside(parent.name));
+      return;
+    }
     // No limit of corners, but sides must not cross (no "bow ties").
     if (GeoUtils.wouldCross(_corners, position)) {
-      ScaffoldMessenger.of(context)
-        ..hideCurrentSnackBar()
-        ..showSnackBar(SnackBar(
-          content: Text(AppLocalizations.of(context).crossingNotAllowed),
-        ));
+      _warn(l10n.crossingNotAllowed);
       return;
     }
     setState(() => _corners.add(position));
@@ -51,7 +61,13 @@ class _DrawAreaScreenState extends ConsumerState<DrawAreaScreen> {
   Future<void> _redraw() async {
     final controller = _controller;
     if (controller == null) return;
-    await drawDraft(controller, _corners, closed: true);
+    await drawDraft(controller, _corners, closed: true, parent: widget.parent);
+  }
+
+  Future<void> _onStyleLoaded() async {
+    final parent = widget.parent;
+    if (parent != null) await fitZone(_controller!, parent);
+    await _redraw();
   }
 
   void _next() {
@@ -59,6 +75,7 @@ class _DrawAreaScreenState extends ConsumerState<DrawAreaScreen> {
       builder: (_) => ZoneFormScreen.create(
         kind: ZoneKind.area,
         geometry: List.of(_corners),
+        parentId: widget.parent?.id,
       ),
     ));
   }
@@ -68,18 +85,23 @@ class _DrawAreaScreenState extends ConsumerState<DrawAreaScreen> {
     final l10n = AppLocalizations.of(context);
     final layer = ref.watch(mapLayerProvider);
     final hasLocation = ref.watch(locationPermissionProvider).value ?? false;
+    final parent = widget.parent;
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.drawArea)),
+      appBar: AppBar(title: Text(parent == null ? l10n.drawArea : l10n.drawSubzone)),
       body: Column(
         children: [
-          InstructionBanner(text: l10n.drawAreaInstructions),
+          InstructionBanner(
+            text: parent == null
+                ? l10n.drawAreaInstructions
+                : l10n.subzoneInstructions(parent.name),
+          ),
           Expanded(
             child: MapLibreMap(
               styleString: layer.styleAsset,
               initialCameraPosition: widget.initialCamera,
               onMapCreated: (c) => _controller = c,
-              onStyleLoadedCallback: _redraw,
+              onStyleLoadedCallback: _onStyleLoaded,
               onMapClick: _addCorner,
               myLocationEnabled: hasLocation,
             ),

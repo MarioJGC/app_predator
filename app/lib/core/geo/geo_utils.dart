@@ -145,6 +145,25 @@ abstract final class GeoUtils {
         ((d3 > 0 && d4 < 0) || (d3 < 0 && d4 > 0));
   }
 
+  /// True if [point] is inside [polygon] (ray casting).
+  static bool contains(List<LatLng> polygon, LatLng point) {
+    var inside = false;
+    for (var i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+      final a = polygon[i];
+      final b = polygon[j];
+      final crosses = (a.latitude > point.latitude) != (b.latitude > point.latitude);
+      if (crosses &&
+          point.longitude <
+              (b.longitude - a.longitude) *
+                      (point.latitude - a.latitude) /
+                      (b.latitude - a.latitude) +
+                  a.longitude) {
+        inside = !inside;
+      }
+    }
+    return inside;
+  }
+
   /// Polygon ring with the first point repeated at the end.
   static List<LatLng> closedRing(List<LatLng> polygon) =>
       polygon.isEmpty ? polygon : [...polygon, polygon.first];

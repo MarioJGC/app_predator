@@ -895,6 +895,240 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Se unirá el final del camino con el principio.'**
   String get convertToAreaMessage;
+
+  /// No description provided for @subzonesTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Subzonas ({count})'**
+  String subzonesTitle(int count);
+
+  /// No description provided for @addSubzone.
+  ///
+  /// In es, this message translates to:
+  /// **'Añadir subzona'**
+  String get addSubzone;
+
+  /// No description provided for @noSubzones.
+  ///
+  /// In es, this message translates to:
+  /// **'Esta zona no tiene subzonas.'**
+  String get noSubzones;
+
+  /// No description provided for @drawSubzone.
+  ///
+  /// In es, this message translates to:
+  /// **'Dibujar subzona'**
+  String get drawSubzone;
+
+  /// No description provided for @subzoneInstructions.
+  ///
+  /// In es, this message translates to:
+  /// **'Marca las esquinas de la subzona dentro de «{name}», siguiendo el borde en orden.'**
+  String subzoneInstructions(String name);
+
+  /// No description provided for @subzoneOutside.
+  ///
+  /// In es, this message translates to:
+  /// **'Toca dentro de «{name}»: una subzona tiene que estar dentro de su zona.'**
+  String subzoneOutside(String name);
+
+  /// No description provided for @insideOf.
+  ///
+  /// In es, this message translates to:
+  /// **'Está en'**
+  String get insideOf;
+
+  /// No description provided for @subzonesCount.
+  ///
+  /// In es, this message translates to:
+  /// **'{count} subzonas'**
+  String subzonesCount(int count);
+
+  /// No description provided for @featuresTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Características'**
+  String get featuresTitle;
+
+  /// No description provided for @editFeatures.
+  ///
+  /// In es, this message translates to:
+  /// **'Editar características'**
+  String get editFeatures;
+
+  /// No description provided for @noFeatures.
+  ///
+  /// In es, this message translates to:
+  /// **'Todavía no has anotado nada en esta zona.'**
+  String get noFeatures;
+
+  /// No description provided for @featuresSaved.
+  ///
+  /// In es, this message translates to:
+  /// **'Características guardadas'**
+  String get featuresSaved;
+
+  /// No description provided for @featAnimals.
+  ///
+  /// In es, this message translates to:
+  /// **'Animales vistos'**
+  String get featAnimals;
+
+  /// No description provided for @featFoodWater.
+  ///
+  /// In es, this message translates to:
+  /// **'Comida y agua'**
+  String get featFoodWater;
+
+  /// No description provided for @featDanger.
+  ///
+  /// In es, this message translates to:
+  /// **'Peligro'**
+  String get featDanger;
+
+  /// No description provided for @featDangerLevel.
+  ///
+  /// In es, this message translates to:
+  /// **'Nivel de peligro'**
+  String get featDangerLevel;
+
+  /// No description provided for @featDangerTypes.
+  ///
+  /// In es, this message translates to:
+  /// **'Qué peligro hay'**
+  String get featDangerTypes;
+
+  /// No description provided for @featSigns.
+  ///
+  /// In es, this message translates to:
+  /// **'Encame y pasos'**
+  String get featSigns;
+
+  /// No description provided for @dangerNone.
+  ///
+  /// In es, this message translates to:
+  /// **'Ninguno'**
+  String get dangerNone;
+
+  /// No description provided for @dangerLow.
+  ///
+  /// In es, this message translates to:
+  /// **'Bajo'**
+  String get dangerLow;
+
+  /// No description provided for @dangerMedium.
+  ///
+  /// In es, this message translates to:
+  /// **'Medio'**
+  String get dangerMedium;
+
+  /// No description provided for @dangerHigh.
+  ///
+  /// In es, this message translates to:
+  /// **'Alto'**
+  String get dangerHigh;
+
+  /// No description provided for @foodFeeder.
+  ///
+  /// In es, this message translates to:
+  /// **'Comedero'**
+  String get foodFeeder;
+
+  /// No description provided for @foodWaterTrough.
+  ///
+  /// In es, this message translates to:
+  /// **'Bebedero'**
+  String get foodWaterTrough;
+
+  /// No description provided for @foodNaturalWater.
+  ///
+  /// In es, this message translates to:
+  /// **'Agua natural'**
+  String get foodNaturalWater;
+
+  /// No description provided for @foodCrops.
+  ///
+  /// In es, this message translates to:
+  /// **'Cultivos'**
+  String get foodCrops;
+
+  /// No description provided for @foodAcorns.
+  ///
+  /// In es, this message translates to:
+  /// **'Bellota'**
+  String get foodAcorns;
+
+  /// No description provided for @foodFruit.
+  ///
+  /// In es, this message translates to:
+  /// **'Frutales'**
+  String get foodFruit;
+
+  /// No description provided for @dangerCliff.
+  ///
+  /// In es, this message translates to:
+  /// **'Barranco'**
+  String get dangerCliff;
+
+  /// No description provided for @dangerRoad.
+  ///
+  /// In es, this message translates to:
+  /// **'Carretera'**
+  String get dangerRoad;
+
+  /// No description provided for @dangerHouses.
+  ///
+  /// In es, this message translates to:
+  /// **'Casas cerca'**
+  String get dangerHouses;
+
+  /// No description provided for @dangerNoHunting.
+  ///
+  /// In es, this message translates to:
+  /// **'Zona prohibida'**
+  String get dangerNoHunting;
+
+  /// No description provided for @dangerLivestock.
+  ///
+  /// In es, this message translates to:
+  /// **'Ganado'**
+  String get dangerLivestock;
+
+  /// No description provided for @dangerOther.
+  ///
+  /// In es, this message translates to:
+  /// **'Otro'**
+  String get dangerOther;
+
+  /// No description provided for @signBedding.
+  ///
+  /// In es, this message translates to:
+  /// **'Encame'**
+  String get signBedding;
+
+  /// No description provided for @signCrossing.
+  ///
+  /// In es, this message translates to:
+  /// **'Paso habitual'**
+  String get signCrossing;
+
+  /// No description provided for @signWallow.
+  ///
+  /// In es, this message translates to:
+  /// **'Revolcadero'**
+  String get signWallow;
+
+  /// No description provided for @signRub.
+  ///
+  /// In es, this message translates to:
+  /// **'Rascadero'**
+  String get signRub;
+
+  /// No description provided for @signTracks.
+  ///
+  /// In es, this message translates to:
+  /// **'Rastros'**
+  String get signTracks;
 }
 
 class _AppLocalizationsDelegate
