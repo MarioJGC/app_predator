@@ -65,6 +65,7 @@ Todo ello **funciona sin cobertura** y está pensado para personas mayores o poc
 7. Registro de capturas con foto.
 8. Borrar la cuenta y todos sus datos.
 9. Solo Android.
+10. Interfaz en **español e inglés**.
 
 ### 5.2 Fuera del MVP
 
@@ -203,7 +204,7 @@ Prioridad: **M** = imprescindible para el MVP · **D** = deseable en el MVP · *
 | RNF-06 | Privacidad (RGPD) | Datos alojados en la UE. Consentimiento explícito para la ubicación en segundo plano. Las posiciones se borran a los 7 días. Fotos sin EXIF |
 | RNF-07 | Seguridad | Permisos comprobados en el servidor. Límite de intentos de SMS por número y por IP |
 | RNF-08 | Coste | Infraestructura de 30–50 €/mes durante el piloto (hasta 500 usuarios) |
-| RNF-09 | Idioma | Español de España. Sin anglicismos en la interfaz |
+| RNF-09 | Idiomas | Español de España (idioma principal) e inglés. La app usa el idioma del móvil; si no es ninguno de los dos, español. Ningún texto visible escrito directamente en el código: todo va en archivos de traducción. Sin anglicismos en la versión española |
 
 ## 9. Fases y entregas
 
@@ -216,7 +217,7 @@ Prioridad: **M** = imprescindible para el MVP · **D** = deseable en el MVP · *
 
 Orden propuesto de construcción del MVP (una rama `feature/*` por línea):
 
-1. `feature/estructura-base`: monorepo, tema accesible, navegación con 4 pestañas
+1. `feature/estructura-base`: monorepo, tema accesible, navegación con 4 pestañas, traducciones español/inglés (RNF-09)
 2. `feature/auth-telefono`: RF-01 a RF-05
 3. `feature/zonas`: RF-10 a RF-17
 4. `feature/mapas-offline`: RF-20 a RF-23
@@ -244,6 +245,7 @@ Orden propuesto de construcción del MVP (una rama `feature/*` por línea):
 4. Proveedor de SMS: Twilio, Prelude/Vonage o WhatsApp.
 5. ¿Cuáles serán las cuadrillas o cotos del piloto y en qué provincias? (Determina qué mapas se precargan.)
 6. ¿Hace falta algún aviso legal sobre normativa de caza o seguros?
+7. ¿Quién es el público en inglés: cazadores extranjeros que vienen a cazar a España, o salir a otros países? Si es lo segundo, la cartografía del IGN solo cubre España y habría que añadir otra fuente de mapas.
 
 ## 12. Glosario
 
