@@ -1,0 +1,86 @@
+import 'package:material_ui/material_ui.dart';
+
+/// Accessible theme for older users and outdoor use (PRD RNF-02):
+/// big text (18 pt base), big touch targets (56 px) and high contrast.
+abstract final class AppTheme {
+  /// Minimum height of any button or tappable row.
+  static const double minTouchSize = 56;
+
+  /// Maximum text scale allowed from the phone settings.
+  static const double maxTextScale = 1.5;
+
+  static const Color _seed = Color(0xFF4E6B2F); // Olive green.
+
+  static ThemeData light() {
+    final scheme = ColorScheme.fromSeed(seedColor: _seed);
+    final base = ThemeData(colorScheme: scheme, useMaterial3: true);
+    final text = base.textTheme;
+
+    const buttonText = TextStyle(fontSize: 18, fontWeight: FontWeight.w600);
+    const buttonSize = Size(64, minTouchSize);
+    const buttonPadding = EdgeInsets.symmetric(horizontal: 24, vertical: 12);
+
+    return base.copyWith(
+      textTheme: text.copyWith(
+        headlineSmall: text.headlineSmall?.copyWith(fontSize: 26),
+        titleLarge: text.titleLarge?.copyWith(fontSize: 24),
+        titleMedium: text.titleMedium?.copyWith(fontSize: 20),
+        bodyLarge: text.bodyLarge?.copyWith(fontSize: 18),
+        bodyMedium: text.bodyMedium?.copyWith(fontSize: 18),
+        labelLarge: text.labelLarge?.copyWith(fontSize: 18),
+      ),
+      filledButtonTheme: FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+          minimumSize: buttonSize,
+          padding: buttonPadding,
+          textStyle: buttonText,
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          minimumSize: buttonSize,
+          padding: buttonPadding,
+          textStyle: buttonText,
+          side: BorderSide(color: scheme.outline, width: 2),
+        ),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          minimumSize: buttonSize,
+          textStyle: buttonText,
+        ),
+      ),
+      iconButtonTheme: IconButtonThemeData(
+        style: IconButton.styleFrom(
+          minimumSize: const Size(minTouchSize, minTouchSize),
+          iconSize: 28,
+        ),
+      ),
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
+        sizeConstraints: BoxConstraints.tightFor(width: 64, height: 64),
+        iconSize: 30,
+      ),
+      navigationBarTheme: NavigationBarThemeData(
+        height: 80,
+        labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+        labelTextStyle: WidgetStatePropertyAll(
+          text.labelLarge?.copyWith(fontSize: 16, fontWeight: FontWeight.w600),
+        ),
+        iconTheme: const WidgetStatePropertyAll(IconThemeData(size: 30)),
+      ),
+      listTileTheme: const ListTileThemeData(
+        minVerticalPadding: 12,
+        titleTextStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+        subtitleTextStyle: TextStyle(fontSize: 16),
+      ),
+      inputDecorationTheme: const InputDecorationTheme(
+        border: OutlineInputBorder(),
+        contentPadding: EdgeInsets.all(16),
+      ),
+      snackBarTheme: const SnackBarThemeData(
+        behavior: SnackBarBehavior.floating,
+        contentTextStyle: TextStyle(fontSize: 18),
+      ),
+    );
+  }
+}

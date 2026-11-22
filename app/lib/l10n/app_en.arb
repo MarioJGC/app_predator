@@ -1,0 +1,23 @@
+{
+  "@@locale": "en",
+  "appTitle": "Hunter App",
+  "tabMap": "Map",
+  "tabZones": "My areas",
+  "tabGroups": "Groups",
+  "tabHunt": "Hunt",
+  "yes": "Yes",
+  "no": "No",
+  "cancel": "Cancel",
+  "save": "Save",
+  "layerOrthophoto": "Satellite",
+  "layerTopographic": "Topographic",
+  "changeMap": "Change map",
+  "myLocation": "My location",
+  "locationDenied": "No location permission. Turn it on in the phone settings to see where you are.",
+  "locationUnavailable": "Can't get your location. Check that GPS is on.",
+  "openSettings": "Open settings",
+  "comingSoon": "Coming soon",
+  "groupsComingSoon": "Here you will create your hunting group and invite other hunters. Available with user accounts.",
+  "huntComingSoon": "Here you will organise hunts, assign stands and see your group on the map. Available with user accounts.",
+  "zonesEmpty": "You don't have any areas yet."
+}

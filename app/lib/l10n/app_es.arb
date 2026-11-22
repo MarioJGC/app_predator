@@ -1,0 +1,23 @@
+{
+  "@@locale": "es",
+  "appTitle": "App Cazador",
+  "tabMap": "Mapa",
+  "tabZones": "Mis zonas",
+  "tabGroups": "Grupos",
+  "tabHunt": "Jornada",
+  "yes": "Sí",
+  "no": "No",
+  "cancel": "Cancelar",
+  "save": "Guardar",
+  "layerOrthophoto": "Satélite",
+  "layerTopographic": "Topográfico",
+  "changeMap": "Cambiar mapa",
+  "myLocation": "Mi ubicación",
+  "locationDenied": "Sin permiso de ubicación. Actívalo en los ajustes del móvil para ver dónde estás.",
+  "locationUnavailable": "No se puede obtener tu ubicación. Comprueba que el GPS está activado.",
+  "openSettings": "Abrir ajustes",
+  "comingSoon": "Próximamente",
+  "groupsComingSoon": "Aquí podrás crear tu cuadrilla e invitar a otros cazadores. Llegará con las cuentas de usuario.",
+  "huntComingSoon": "Aquí podrás organizar jornadas, asignar puestos y ver a tu grupo en el mapa. Llegará con las cuentas de usuario.",
+  "zonesEmpty": "Todavía no tienes zonas."
+}
