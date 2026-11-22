@@ -125,6 +125,8 @@ app-cazador/
 6. **Mapas offline:**
    - Al guardar o recibir una zona, se ofrece «Descargar mapa de esta zona». Se descarga su rectángulo más 1 km de margen, con zoom de 12 a 17 (unos 20–80 MB según el tamaño).
    - Las teselas vienen de nuestra caché en Cloudflare R2 y no directamente del IGN, para no saturar sus servidores. Hay que **verificar sus condiciones de uso masivo** antes del lanzamiento.
+   - **Validado en la prueba técnica** (`spike/mapas-offline`, 22/11/2026): con `maplibre_gl` 0.28 se descarga una región PNOA (zoom 12–16) y se ve en modo avión.
+   - **Lección aprendida:** el gestor offline de MapLibre **solo descarga estilos servidos por http(s)**; no acepta `asset://` ni `file://`. Por eso el mapa carga el estilo desde los *assets* de la app (funciona sin red) y la descarga usa la **misma** hoja de estilo publicada en una URL. Como las URLs de las teselas coinciden, las teselas descargadas se reutilizan. En producción, el estilo se publicará junto a la caché de teselas (Cloudflare).
 ## 6. Jornada en vivo
  
 ```mermaid
@@ -335,7 +337,7 @@ Las tablas `punto`, `captura`, `jornada`, etc. siguen el mismo patrón. **Todos 
 | # | Decisión | Opciones | Cuándo decidir |
 |---|---|---|---|
 | 1 | Proveedor de SMS | Twilio (fácil) vs Prelude/Vonage (barato) vs OTP por WhatsApp | Antes del piloto |
-| 2 | Teselas offline | Caché propia del IGN vs MapTiler (de pago, más sencillo) | Sprint 1 (prueba técnica) |
+| 2 | Teselas offline | Caché propia del IGN vs MapTiler (de pago, más sencillo) | ✅ Prueba técnica superada con teselas IGN y regiones offline de MapLibre. Falta decidir el alojamiento del estilo y la caché |
 | 3 | GPS en segundo plano | `geolocator` vs `flutter_background_geolocation` | Tras probar la batería en el campo |
 | 4 | Nombre y dominio | — | Antes de configurar los App Links |
 | 5 | iOS en el MVP o después | — | Según los móviles de los usuarios del piloto |
